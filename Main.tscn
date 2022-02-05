@@ -14,11 +14,11 @@ region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -34,22 +34,22 @@ animations = [ {
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "diagonal_down",
+"name": "horizontal",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 4 ) ],
 "loop": true,
-"name": "horizontal",
+"name": "diagonal_down",
 "speed": 5.0
 } ]
 
 [node name="Main" type="Node2D"]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="Tank" type="KinematicBody2D" parent="."]
 position = Vector2( 504.605, 286.77 )
 script = ExtResource( 2 )
 
-[node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="Sprite" type="AnimatedSprite" parent="Tank"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 5 )
 animation = "diagonal_down"
@@ -57,9 +57,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
 
-[node name="Cannon" type="Sprite" parent="KinematicBody2D"]
+[node name="Cannon" type="Sprite" parent="Tank"]
 position = Vector2( 0, -8 )
 scale = Vector2( 4, 4 )
 z_index = 1
