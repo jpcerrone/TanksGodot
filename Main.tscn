@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tanks.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://cannon.png" type="Texture" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -51,12 +52,13 @@ extents = Vector2( 511.476, 10.8842 )
 extents = Vector2( 11.5125, 301.555 )
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 5 )
 
-[node name="Tank" type="KinematicBody2D" parent="."]
+[node name="PlayerTank" type="KinematicBody2D" parent="."]
 position = Vector2( 504.605, 286.77 )
 script = ExtResource( 2 )
 
-[node name="Sprite" type="AnimatedSprite" parent="Tank"]
+[node name="Sprite" type="AnimatedSprite" parent="PlayerTank"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 5 )
 animation = "diagonal_down"
@@ -64,9 +66,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTank"]
 
-[node name="Cannon" type="Sprite" parent="Tank"]
+[node name="Cannon" type="Sprite" parent="PlayerTank"]
 position = Vector2( 0, -8 )
 scale = Vector2( 4, 4 )
 z_index = 1

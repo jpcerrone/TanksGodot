@@ -21,4 +21,5 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal)
 		currentRebounds += 1;
 		if (currentRebounds > maxRebounds):
+			Global.currentBullets -= 1
 			queue_free()

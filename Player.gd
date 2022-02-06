@@ -111,13 +111,13 @@ func _physics_process(delta):
 	#$Cannon.look_at(get_global_mouse_position())
 	
 	#print_debug($Cannon.rotation)
-	var bullet
-
-	if Input.is_action_just_pressed("shoot"):
-		bullet = Bullet.instance()
-		bullet.setup(position, (get_global_mouse_position() - position).normalized())
-		get_node("/root/Main").add_child(bullet)
+	
 	tankRotation += rotation_dir * rotDelta
 	velocity = velocity.normalized() * speed
 	velocity = move_and_slide(velocity)
 
+func shoot():
+	var bullet
+	bullet = Bullet.instance()
+	bullet.setup(position, (get_global_mouse_position() - position).normalized())
+	get_node("/root/Main").add_child(bullet)
