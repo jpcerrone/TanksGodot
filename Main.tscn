@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tanks.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://cannon.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -10,7 +11,7 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -18,7 +19,7 @@ region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -29,7 +30,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "diagonal_up",
+"name": "diagonal_down",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
@@ -39,9 +40,15 @@ animations = [ {
 }, {
 "frames": [ SubResource( 4 ) ],
 "loop": true,
-"name": "diagonal_down",
+"name": "diagonal_up",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 511.476, 10.8842 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 11.5125, 301.555 )
 
 [node name="Main" type="Node2D"]
 
@@ -64,3 +71,34 @@ position = Vector2( 0, -8 )
 scale = Vector2( 4, 4 )
 z_index = 1
 texture = ExtResource( 3 )
+
+[node name="Area2D" type="RigidBody2D" parent="."]
+mode = 1
+mass = 0.00102041
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 509.434, 12.2784 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 513.789, 587.176 )
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 11.6997, 301.924 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 1011.46, 296.393 )
+shape = SubResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+visible = false
+texture = ExtResource( 4 )
