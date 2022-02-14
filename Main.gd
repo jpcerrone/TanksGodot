@@ -4,7 +4,7 @@ const maxBullets = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Global.currentBullets = 0
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -29,7 +29,6 @@ func _physics_process(delta):
 		tankDirection = $PlayerTank.Direction.RIGHT
 	$PlayerTank.move(delta, tankDirection)
 
-	if (Global.currentBullets < maxBullets) && Input.is_action_just_pressed("shoot"):
+	if (get_tree().get_nodes_in_group("liveBullets").size() < maxBullets) && Input.is_action_just_pressed("shoot"):
 		$PlayerTank.shoot()
-		Global.currentBullets += 1
 

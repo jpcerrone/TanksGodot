@@ -224,7 +224,9 @@ extents = Vector2( 11.5125, 301.555 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="PlayerTank" type="KinematicBody2D" parent="."]
+[node name="PlayerTank" type="KinematicBody2D" parent="." groups=[
+"destroyable",
+]]
 position = Vector2( 523.734, 293.146 )
 script = ExtResource( 2 )
 
@@ -259,23 +261,17 @@ scale = Vector2( -1, 1 )
 polygon = PoolVector2Array( -28.1995, 2.43475, -27.5553, -7.55121, -7.26123, -28.1673, 4.01318, -28.1673, 27.8506, -4.97418, 28.1727, 7.26666, 7.87872, 27.8828, -3.39575, 28.2049 )
 disabled = true
 
-[node name="Area2D" type="RigidBody2D" parent="." groups=[
-"bulletBouncers",
-]]
+[node name="Area2D" type="RigidBody2D" parent="."]
 collision_mask = 0
 mode = 1
 mass = 0.00102041
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=[
-"bulletBouncers",
-]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 509.434, 12.2784 )
+position = Vector2( 509.434, 13.2784 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=[
-"bulletBouncers",
-]]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 513.789, 587.176 )
 shape = SubResource( 6 )
@@ -283,16 +279,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" groups=[
-"bulletBouncers",
-]]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 11.6997, 301.924 )
 shape = SubResource( 7 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" groups=[
-"bulletBouncers",
-]]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1011.46, 296.393 )
 shape = SubResource( 7 )

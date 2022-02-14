@@ -13,17 +13,23 @@ func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	position = initialPosition
 	self.velocity = initialVelocity
 	currentRebounds = 0
+	add_to_group("liveBullets")
+
+func destroy():
+	if (get_tree().get_nodes_in_group("liveBullets").has(self)):
+		remove_from_group("liveBullets")
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var collision = move_and_collide(velocity*delta*speed)
 	if (collision):
-		if (collision.collider.get_groups().has("bulletBouncers")):
-			velocity = velocity.bounce(collision.normal)
-			currentRebounds += 1;
-			if (currentRebounds > maxRebounds):
-				Global.currentBullets -= 1
-				queue_free()
+		if (collision.collider.get_groups().has("destroyable")):
+			collision.collider.destroy()
+			self.destroy()
 		else:
-			Global.currentBullets -= 1
-			queue_free()
+			if (currentRebounds >= maxRebounds):
+				queue_free()
+			else: 
+				velocity = velocity.bounce(collision.normal)
+				currentRebounds += 1;

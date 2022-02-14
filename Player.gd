@@ -104,13 +104,13 @@ func move(delta, direction):
 	if (tankRotation < 0):
 		tankRotation = tankRotation + 2*PI
 
-	updateRotationAnimation(rotDelta)
+	updateRotationAnimation()
 	
 	if (velocity != Vector2(0,0)):
 		velocity = velocity.normalized() * speed
 		velocity = move_and_slide(velocity)
 
-func updateRotationAnimation(rotDelta):
+func updateRotationAnimation():
 	if (tankRotation <= PI/8) || (tankRotation > 7*PI/4) :
 		$AnimationPlayer.current_animation = "vertical"
 	elif (tankRotation <= 3*PI/8):
@@ -137,3 +137,6 @@ func shoot():
 	var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
 	bullet.setup(canonTipPosition, (get_global_mouse_position() - position).normalized())
 	get_node("/root/Main").add_child(bullet)
+	
+func destroy():
+	get_tree().quit()
