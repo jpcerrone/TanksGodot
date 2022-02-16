@@ -131,12 +131,12 @@ func updateRotationAnimation():
 func rotateCannon(angle):
 	$Cannon.rotation = angle
 
-func shoot():
+func shoot(target):
 	var bullet
 	bullet = Bullet.instance()
 	var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
-	bullet.setup(canonTipPosition, (get_global_mouse_position() - position).normalized())
+	bullet.setup(canonTipPosition, (target - position).normalized())
 	get_node("/root/Main").add_child(bullet)
 	
 func destroy():
-	get_tree().quit()
+	queue_free()
