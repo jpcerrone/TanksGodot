@@ -14,6 +14,7 @@ func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	self.velocity = initialVelocity
 	currentRebounds = 0
 	add_to_group("liveBullets")
+	self.rotation = initialVelocity.angle()
 
 func destroy():
 	if (get_tree().get_nodes_in_group("liveBullets").has(self)):
@@ -32,4 +33,5 @@ func _physics_process(delta):
 				queue_free()
 			else: 
 				velocity = velocity.bounce(collision.normal)
+				self.rotation = velocity.angle()
 				currentRebounds += 1;
