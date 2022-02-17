@@ -6,7 +6,7 @@ var velocity = Vector2()
 var rotation_dir = 0
 var tankRotation = 0.0
 
-const Bullet = preload("res://Bullet.tscn")
+const Bullet = preload("res://scenes/Bullet.tscn")
 enum Direction {UP, DOWN, LEFT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP_LEFT, UP_RIGHT}
 
 # Called when the node enters the scene tree for the first time.
