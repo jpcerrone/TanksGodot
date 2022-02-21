@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GreyTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/icon.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
@@ -46,7 +46,7 @@ shape = SubResource( 2 )
 visible = false
 texture = ExtResource( 4 )
 
-[node name="Tank" parent="." instance=ExtResource( 1 )]
-position = Vector2( 700, 293.146 )
-
 [node name="PlayerTank" parent="." instance=ExtResource( 2 )]
+
+[node name="GreyTank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 700, 293.146 )

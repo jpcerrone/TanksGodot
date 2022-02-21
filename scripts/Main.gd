@@ -29,6 +29,6 @@ func _physics_process(delta):
 		tankDirection = $PlayerTank.Direction.RIGHT
 	$PlayerTank.move(delta, tankDirection)
 
-	if (get_tree().get_nodes_in_group("liveBullets").size() < maxBullets) && Input.is_action_just_pressed("shoot"):
-		$PlayerTank.shoot(get_global_mouse_position())
+	if (get_tree().get_nodes_in_group("playerBullets").size() < maxBullets) && Input.is_action_just_pressed("shoot"):
+		$PlayerTank.shoot()
 

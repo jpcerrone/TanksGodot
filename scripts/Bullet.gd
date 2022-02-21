@@ -13,12 +13,11 @@ func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	position = initialPosition
 	self.velocity = initialVelocity
 	currentRebounds = 0
-	add_to_group("liveBullets")
 	self.rotation = initialVelocity.angle()
 
 func destroy():
-	if (get_tree().get_nodes_in_group("liveBullets").has(self)):
-		remove_from_group("liveBullets")
+	if (get_tree().get_nodes_in_group("playerBullets").has(self)):
+		remove_from_group("playerBullets")
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
