@@ -6,12 +6,12 @@
 [node name="GreyTank" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="." index="5"]
+[node name="ShootingTimer" type="Timer" parent="." index="5"]
 wait_time = 5.0
 autostart = true
 
 [node name="ChangeDirectionTimer" type="Timer" parent="." index="6"]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_ShootingTimer_timeout"]
 [connection signal="timeout" from="ChangeDirectionTimer" to="." method="_on_ChangeDirectionTimer_timeout"]

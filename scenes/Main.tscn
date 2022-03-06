@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/GreyTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=4]
+[ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -14,8 +14,9 @@ extents = Vector2( 11.5125, 301.555 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="Area2D" type="RigidBody2D" parent="."]
-collision_mask = 0
+[node name="Area2D" type="RigidBody2D" parent="." groups=[
+"walls",
+]]
 mode = 1
 mass = 0.00102041
 
@@ -42,11 +43,20 @@ modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1011.46, 296.393 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
-visible = false
-texture = ExtResource( 4 )
-
-[node name="PlayerTank" parent="." instance=ExtResource( 2 )]
+[node name="PlayerTank" parent="." groups=[
+"player",
+] instance=ExtResource( 2 )]
 
 [node name="GreyTank" parent="." instance=ExtResource( 1 )]
 position = Vector2( 700, 293.146 )
+
+[node name="Sprite" type="TextureRect" parent="."]
+show_behind_parent = true
+margin_right = 255.0
+margin_bottom = 149.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
