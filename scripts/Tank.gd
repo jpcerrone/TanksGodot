@@ -5,6 +5,8 @@ export (float) var rotation_speed = 5.0
 var velocity = Vector2()
 var rotation_dir = 0
 var tankRotation = 0.0
+var maxBullets = 1
+var liveBullets = []
 
 const Bullet = preload("res://scenes/Bullet.tscn")
 enum Direction {UP, DOWN, LEFT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP_LEFT, UP_RIGHT}
@@ -132,10 +134,18 @@ func rotateCannon(angle):
 	$Cannon.rotation = angle
 
 func shoot():
-	var bullet = Bullet.instance()
-	var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
-	bullet.setup(canonTipPosition, Vector2(1,0).rotated($Cannon.rotation))
-	get_node("/root/Main").add_child(bullet)
+	if (getActiveBullets() < maxBullets):
+		var bullet = Bullet.instance()
+		var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
+		bullet.setup(canonTipPosition, Vector2(1,0).rotated($Cannon.rotation))
+		get_node("/root/Main").add_child(bullet)
+		liveBullets.append(bullet)
 	
+func getActiveBullets():
+	var bullets = 0
+	for b in liveBullets:
+		if (is_instance_valid(b)):
+			bullets +=1
+	return bullets
 func destroy():
 	queue_free()

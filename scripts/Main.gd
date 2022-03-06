@@ -1,7 +1,5 @@
 extends Node2D
 
-const maxBullets = 5
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -29,6 +27,6 @@ func _physics_process(delta):
 		tankDirection = $PlayerTank.Direction.RIGHT
 	$PlayerTank.move(delta, tankDirection)
 
-	if (get_tree().get_nodes_in_group("playerBullets").size() < maxBullets) && Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot"):
 		$PlayerTank.shoot()
 
