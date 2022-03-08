@@ -16,8 +16,6 @@ func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	self.rotation = initialVelocity.angle()
 
 func destroy():
-	if (get_tree().get_nodes_in_group("playerBullets").has(self)):
-		remove_from_group("playerBullets")
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

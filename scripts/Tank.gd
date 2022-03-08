@@ -5,10 +5,16 @@ export (float) var rotation_speed = 5.0
 var velocity = Vector2()
 var rotation_dir = 0
 var tankRotation = 0.0
+
 var maxBullets = 1
+var maxMines = 0
+
 var liveBullets = []
+var liveMines = []
 
 const Bullet = preload("res://scenes/Bullet.tscn")
+const Mine = preload("res://scenes/Mine.tscn")
+
 enum Direction {UP, DOWN, LEFT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP_LEFT, UP_RIGHT}
 
 # Called when the node enters the scene tree for the first time.
@@ -134,18 +140,18 @@ func rotateCannon(angle):
 	$Cannon.rotation = angle
 
 func shoot():
-	if (getActiveBullets() < maxBullets):
+	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
 		var bullet = Bullet.instance()
 		var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
 		bullet.setup(canonTipPosition, Vector2(1,0).rotated($Cannon.rotation))
 		get_node("/root/Main").add_child(bullet)
 		liveBullets.append(bullet)
 	
-func getActiveBullets():
-	var bullets = 0
-	for b in liveBullets:
-		if (is_instance_valid(b)):
-			bullets +=1
-	return bullets
+func plantMine():
+	if (Utils.getNumberOfActiveObjects(liveMines) < maxMines):
+		var mine = Mine.instance()
+		mine.position = position
+		get_node("/root/Main").add_child(mine)
+		liveMines.append(mine)
 func destroy():
 	queue_free()

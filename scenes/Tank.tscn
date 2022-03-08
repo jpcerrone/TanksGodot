@@ -217,6 +217,7 @@ tracks/3/keys = {
 "destroyable",
 ]]
 position = Vector2( 523.734, 293.146 )
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -46,11 +46,16 @@ shape = SubResource( 2 )
 [node name="PlayerTank" parent="." groups=[
 "player",
 ] instance=ExtResource( 2 )]
+z_index = 0
 
 [node name="GreyTank" parent="." instance=ExtResource( 1 )]
 position = Vector2( 700, 293.146 )
+z_index = 0
 
-[node name="Sprite" type="TextureRect" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="TextureRect" parent="Background"]
 show_behind_parent = true
 margin_right = 255.0
 margin_bottom = 149.0

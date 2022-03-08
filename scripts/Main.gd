@@ -29,4 +29,7 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("shoot"):
 		$PlayerTank.shoot()
+		
+	if Input.is_action_just_pressed("plant_mine"):
+		$PlayerTank.plantMine()
 
