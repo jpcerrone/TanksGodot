@@ -223,6 +223,7 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1.09399 )
 shape = ExtResource( 2 )
+disabled = true
 
 [node name="Cannon" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -237,7 +238,7 @@ __meta__ = {
 scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 hframes = 4
-frame = 1
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/TankMovement = SubResource( 1 )
@@ -247,6 +248,4 @@ anims/horizontal = SubResource( 4 )
 anims/vertical = SubResource( 5 )
 
 [node name="Diagonal_collision" type="CollisionPolygon2D" parent="."]
-scale = Vector2( -1, 1 )
 polygon = PoolVector2Array( -28.1995, 2.43475, -27.5553, -7.55121, -7.26123, -28.1673, 4.01318, -28.1673, 27.8506, -4.97418, 28.1727, 7.26666, 7.87872, 27.8828, -3.39575, 28.2049 )
-disabled = true

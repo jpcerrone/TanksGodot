@@ -15,3 +15,10 @@ func createBlast():
 func destroy():
 	call_deferred("createBlast")
 	queue_free()
+
+func _on_ExpireTimer_timeout():
+	$BlastTimer.start()
+	$AnimationPlayer.play("tick")
+
+func _on_BlastTimer_timeout():
+	destroy()
