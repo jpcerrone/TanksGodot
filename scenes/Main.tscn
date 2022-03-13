@@ -6,10 +6,10 @@
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 511.476, 10.8842 )
+extents = Vector2( 155.425, 10.8842 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11.5125, 301.555 )
+extents = Vector2( 14.227, 135.082 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
@@ -22,34 +22,32 @@ mass = 0.00102041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 509.434, 13.2784 )
+position = Vector2( 179.822, 10.6275 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 513.789, 587.176 )
+position = Vector2( 176.981, 259.492 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 11.6997, 301.924 )
+position = Vector2( 13.7402, 135.433 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 1011.46, 296.393 )
+position = Vector2( 345.703, 135.271 )
 shape = SubResource( 2 )
 
 [node name="PlayerTank" parent="." groups=[
 "player",
 ] instance=ExtResource( 2 )]
+position = Vector2( 200, 145.822 )
 z_index = 0
 
 [node name="GreyTank" parent="." instance=ExtResource( 1 )]
-position = Vector2( 700, 293.146 )
+position = Vector2( 300, 79.619 )
 z_index = 0
 
 [node name="Background" type="CanvasLayer" parent="."]
@@ -57,11 +55,11 @@ layer = -1
 
 [node name="Sprite" type="TextureRect" parent="Background"]
 show_behind_parent = true
-margin_right = 255.0
-margin_bottom = 149.0
-rect_scale = Vector2( 4, 4 )
+margin_right = 359.0
+margin_bottom = 270.0
 texture = ExtResource( 3 )
 stretch_mode = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }

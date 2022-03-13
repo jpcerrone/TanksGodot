@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/Mine.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.0033, 15.7672 )
+extents = Vector2( 3.01429, 2.54769 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "tick"
@@ -33,13 +33,13 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="." groups=[
 "destroyable",
 ]]
-scale = Vector2( 4, 4 )
 z_index = -1
 z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.452201 )
 shape = SubResource( 1 )
 
 [node name="ExpireTimer" type="Timer" parent="."]

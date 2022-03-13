@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var speed = 175
+export (int) var speed = 60
 export (float) var rotation_speed = 5.0
 var velocity = Vector2()
 var rotation_dir = 0
@@ -142,7 +142,7 @@ func rotateCannon(angle):
 func shoot():
 	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
 		var bullet = Bullet.instance()
-		var canonTipPosition = position + Vector2(50, 1).rotated($Cannon.rotation)
+		var canonTipPosition = position + Vector2(15, 1).rotated($Cannon.rotation)
 		bullet.setup(canonTipPosition, Vector2(1,0).rotated($Cannon.rotation))
 		get_node("/root/Main").add_child(bullet)
 		liveBullets.append(bullet)
