@@ -216,7 +216,6 @@ tracks/3/keys = {
 [node name="Tank" type="KinematicBody2D" groups=[
 "destroyable",
 ]]
-position = Vector2( 523.734, 293.146 )
 z_index = 1
 script = ExtResource( 1 )
 

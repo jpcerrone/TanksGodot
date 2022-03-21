@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/BrownTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
+[ext_resource path="res://sprites/explosion.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 155.425, 10.8842 )
+extents = Vector2( 196.357, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 14.227, 135.082 )
+extents = Vector2( 10, 160 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
@@ -22,22 +23,22 @@ mass = 0.00102041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 179.822, 10.6275 )
+position = Vector2( 180.881, 11.6869 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 176.981, 259.492 )
+position = Vector2( 180.224, 260.44 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 13.7402, 135.433 )
+position = Vector2( 11.1154, 135.433 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 345.703, 135.271 )
+position = Vector2( 348.107, 135.271 )
 shape = SubResource( 2 )
 
 [node name="PlayerTank" parent="." groups=[
@@ -47,7 +48,7 @@ position = Vector2( 200, 145.822 )
 z_index = 0
 
 [node name="GreyTank" parent="." instance=ExtResource( 1 )]
-position = Vector2( 300, 79.619 )
+position = Vector2( 88.9305, 80.7297 )
 z_index = 0
 
 [node name="Background" type="CanvasLayer" parent="."]
@@ -63,3 +64,8 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 195.378, 103.623 )
+texture = ExtResource( 4 )

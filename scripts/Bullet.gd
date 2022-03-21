@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const speed = 100.0
+const speed = 150.0
 const maxRebounds = 1
 var currentRebounds
 var velocity = Vector2()

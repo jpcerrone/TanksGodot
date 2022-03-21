@@ -2,17 +2,22 @@ extends "res://scripts/Tank.gd"
 
 var rotationDirection = 1
 var rng
-var okToShoot = false
+var okToShoot
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	okToShoot = false
 	rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var directions = [-1,1]
+	rotationDirection = directions[rng.randi_range(0,1)]
+	$ChangeDirectionTimer.wait_time = rng.randf_range(0, 5.0)
 
 func _physics_process(delta):
 	$Cannon.rotation += delta * rotationDirection
 	if(okToShoot):
-		var cannonTipPos = position + Vector2(50, 0).rotated($Cannon.rotation)
+		var cannonTipPos = position + Vector2($Cannon.texture.get_size().x, 0).rotated($Cannon.rotation)
 		var spaceState = get_world_2d().direct_space_state
 		#Replace 1000 with bounds for resolution
 		var result = spaceState.intersect_ray(cannonTipPos, cannonTipPos + Vector2(1,0).rotated($Cannon.rotation)*1000)
@@ -20,7 +25,7 @@ func _physics_process(delta):
 			if(result.collider.is_in_group('player')):
 				shoot()
 				okToShoot = false
-			if(result.collider.is_in_group('walls')):
+			elif(result.collider.is_in_group('walls')):
 				var dirVector = Vector2(1,0).rotated($Cannon.rotation)
 				var newResult = spaceState.intersect_ray(result.position, result.position + dirVector.bounce(result.normal)*1000)
 				if(newResult && newResult.collider.is_in_group('player')):
