@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+var Explosion = preload("res://scenes/Explosion.tscn")
 
 const speed = 150.0
 const maxRebounds = 1
@@ -24,6 +24,7 @@ func _physics_process(delta):
 	if (collision):
 		if (collision.collider.get_groups().has("destroyable")):
 			collision.collider.destroy()
+			createExplosion(collision.collider.position)
 			self.destroy()
 		else:
 			if (currentRebounds >= maxRebounds):
@@ -32,3 +33,8 @@ func _physics_process(delta):
 				velocity = velocity.bounce(collision.normal)
 				self.rotation = velocity.angle()
 				currentRebounds += 1;
+
+func createExplosion(colliderPosition):
+	var explosion = Explosion.instance()
+	explosion.position = colliderPosition
+	get_node("/root/Main").add_child(explosion)

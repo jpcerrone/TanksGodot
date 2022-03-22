@@ -7,5 +7,8 @@ func _init():
 func _ready():
 	pass # Replace with function body.
 
+func _physics_process(_delta):
+	Global.p1Position = position
+
 func destroy(): #redefines destroy
 	get_tree().quit()
