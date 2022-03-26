@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/BrownTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
+[ext_resource path="res://sprites/wall1.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 [ext_resource path="res://scenes/GreyTank.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/versailles.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 196.357, 10 )
+extents = Vector2( 228.28, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 160 )
+extents = Vector2( 15.8001, 158.239 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
@@ -23,22 +24,22 @@ mass = 0.00102041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 180.881, 11.6869 )
+position = Vector2( 244.005, 9.84835 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 180.224, 260.44 )
+position = Vector2( 242.122, 259.827 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 11.1154, 135.433 )
+position = Vector2( 15.6609, 135.433 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 348.107, 135.271 )
+position = Vector2( 469.452, 134.658 )
 shape = SubResource( 2 )
 
 [node name="PlayerTank" parent="." groups=[
@@ -47,26 +48,42 @@ shape = SubResource( 2 )
 position = Vector2( 200, 145.822 )
 z_index = 0
 
-[node name="GreyTank" parent="." instance=ExtResource( 1 )]
-position = Vector2( 88.9305, 80.7297 )
-z_index = 0
+[node name="GreyTank2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 171.34, 74.0415 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
 [node name="Sprite" type="TextureRect" parent="Background"]
 show_behind_parent = true
-margin_right = 359.0
-margin_bottom = 270.0
+margin_right = 480.0
+margin_bottom = 268.0
 texture = ExtResource( 3 )
 stretch_mode = 2
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="BrownTank" parent="." instance=ExtResource( 1 )]
-position = Vector2( 285.245, 113.789 )
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 187.44, 305.49 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -22.8531 )
 
-[node name="GreyTank2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 161.605, 50.1914 )
+[node name="Wall5" type="Sprite" parent="."]
+position = Vector2( 15.6693, 192.339 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -22.8531 )
+
+[node name="Wall4" type="Sprite" parent="."]
+position = Vector2( 466.374, 165.774 )
+scale = Vector2( 0.834931, 1.00801 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -22.8531 )
+
+[node name="Wall2" type="Sprite" parent="."]
+position = Vector2( 317.559, 284.426 )
+texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 252.359, 24.0363 )
+texture = ExtResource( 7 )

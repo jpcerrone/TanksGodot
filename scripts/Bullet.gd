@@ -24,8 +24,9 @@ func _physics_process(delta):
 	if (collision):
 		if (collision.collider.get_groups().has("destroyable")):
 			collision.collider.destroy()
-			createExplosion(collision.collider.position)
 			self.destroy()
+			if (!collision.collider.get_groups().has("no_explosion")):
+				createExplosion(collision.collider.position)
 		else:
 			if (currentRebounds >= maxRebounds):
 				queue_free()

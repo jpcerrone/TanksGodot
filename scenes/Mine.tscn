@@ -25,6 +25,7 @@ tracks/0/keys = {
 
 [node name="Mine" type="StaticBody2D" groups=[
 "destroyable",
+"no_explosion",
 ]]
 collision_layer = 2
 collision_mask = 2

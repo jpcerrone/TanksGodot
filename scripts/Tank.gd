@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var speed = 60
+export (int) var speed = 40
 export (float) var rotation_speed = 5.0
 var velocity = Vector2()
 var rotation_dir = 0
@@ -15,7 +15,7 @@ var liveMines = []
 const Bullet = preload("res://scenes/Bullet.tscn")
 const Mine = preload("res://scenes/Mine.tscn")
 
-enum Direction {UP, DOWN, LEFT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP_LEFT, UP_RIGHT}
+enum Direction {UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
