@@ -3,7 +3,7 @@ extends KinematicBody2D
 export (int) var speed = 40
 export (float) var rotation_speed = 5.0
 var velocity = Vector2()
-var rotation_dir = 0
+
 var tankRotation = 0.0
 
 var maxBullets = 1
@@ -15,126 +15,73 @@ var liveMines = []
 const Bullet = preload("res://scenes/Bullet.tscn")
 const Mine = preload("res://scenes/Mine.tscn")
 
-enum Direction {UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT}
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var directions = {
+	"UP": Vector2(0,-1),
+	"UP_RIGHT": Vector2(1,-1),
+	"RIGHT": Vector2(1,0),
+	"DOWN_RIGHT": Vector2(1,1),
+	"DOWN": Vector2(0,1),
+	"DOWN_LEFT": Vector2(-1,1),
+	"LEFT": Vector2(-1,0),
+	"UP_LEFT": Vector2(-1,-1),
+}
 
-func isRotationWithinDeltaForDirections(direction1, direction2, rotDelta):
-	var isWithinDeltaFirstDirection = (tankRotation > direction1 - rotDelta) && (tankRotation < direction1 + rotDelta)
-	if (isWithinDeltaFirstDirection):
-		tankRotation = direction1
-	var isWithinDeltaSecondDirection = (tankRotation > direction2 - rotDelta) && (tankRotation < direction2 + rotDelta)
-	if (isWithinDeltaSecondDirection):
-		tankRotation = direction2
-	return isWithinDeltaFirstDirection || isWithinDeltaSecondDirection
-
-func get_dir_to_allign_diagonal_up():
-	if (tankRotation < PI/4) || (tankRotation >= 7*PI/4):
-		return 1
-	elif (tankRotation < 3*PI/4):
-		return -1
-	elif (tankRotation < 5*PI/4):
-		return 1
-	elif (tankRotation < 7*PI/4):
-		return -1
-
-func get_dir_to_allign_diagonal_down():
-	return -get_dir_to_allign_diagonal_up()
-
-func get_dir_to_allign_vertical():
-	if (tankRotation < PI/2):
-		return -1
-	elif (tankRotation < PI):
-		return 1
-	elif (tankRotation < 3*PI/2):
-		return -1
-	elif (tankRotation < 2*PI):
-		return 1
-
-func get_dir_to_allign_horizontal():
-	return -get_dir_to_allign_vertical()
+func isRotationWithinDeltaForDirection(direction, rotDelta):
+	return (tankRotation > direction - rotDelta) && (tankRotation < direction + rotDelta)
+	 
 
 func move(delta, direction):
-	#delete previous rotation and movement values
-	rotation_dir = 0
-	velocity = Vector2(0, 0)
-	
+	var rotation_dir = 0
 	var rotDelta = rotation_speed * delta
-	
-	match(direction):
-		Direction.RIGHT:
-			if !isRotationWithinDeltaForDirections(PI/2, 3*PI/2, rotDelta):
-				rotation_dir = get_dir_to_allign_horizontal()
-			else:
-				velocity = Vector2(1,0)
-		Direction.LEFT:
-			if !isRotationWithinDeltaForDirections(PI/2, 3*PI/2, rotDelta):
-				rotation_dir = get_dir_to_allign_horizontal()
-			else:
-				velocity = Vector2(-1,0)
-		Direction.UP:
-			if !isRotationWithinDeltaForDirections(0, PI, rotDelta):
-				rotation_dir = get_dir_to_allign_vertical()
-			else:
-				velocity = Vector2(0,-1)
-		Direction.DOWN:
-			if !isRotationWithinDeltaForDirections(0, PI, rotDelta):
-				rotation_dir = get_dir_to_allign_vertical()
-			else:
-				velocity = Vector2(0,1)
-		Direction.DOWN_LEFT:
-			if !isRotationWithinDeltaForDirections(PI/4, 5*PI/4, rotDelta):
-				rotation_dir = get_dir_to_allign_diagonal_up()
-			else:
-				velocity = Vector2(-1,1)
-		Direction.DOWN_RIGHT:
-			if !isRotationWithinDeltaForDirections(3*PI/4, 7*PI/4, rotDelta):
-				rotation_dir = get_dir_to_allign_diagonal_down()
-			else:
-				velocity = Vector2(1,1)
-		Direction.UP_LEFT:
-			if !isRotationWithinDeltaForDirections(3*PI/4, 7*PI/4, rotDelta):
-				rotation_dir = get_dir_to_allign_diagonal_down()
-			else:
-				velocity = Vector2(-1,-1)
-		Direction.UP_RIGHT:
-			if !isRotationWithinDeltaForDirections(PI/4, 5*PI/4, rotDelta):
-				rotation_dir = get_dir_to_allign_diagonal_up()
-			else:
-				velocity = Vector2(1,-1)	
-	
-	tankRotation += rotation_dir * rotDelta
-	#Only one tankRotation is counted
-	if (tankRotation > 2*PI):
-		tankRotation = tankRotation - 2*PI
-	if (tankRotation < 0):
-		tankRotation = tankRotation + 2*PI
 
-	updateRotationAnimation()
+	#Find best direction to rotate towards (direction / -direction)
+	var angleToDirection = abs(Vector2(1,0).rotated(tankRotation).angle_to(direction))
+	var angleToOppositeDirection = abs(Vector2(1,0).rotated(tankRotation).angle_to(-direction))
+	var closerDirection = direction
+	if !(min(angleToDirection, angleToOppositeDirection) == angleToDirection):
+		closerDirection = -direction	
 	
-	if (velocity != Vector2(0,0)):
-		velocity = velocity.normalized() * speed
+	#Rotate tank towards desited direction if it's not already in it
+	#If it is, move towards that direction
+	if (!isRotationWithinDeltaForDirection(closerDirection.angle(), rotDelta)):
+		if (tankRotation > closerDirection.angle()):
+			rotation_dir = -1
+		else:
+			rotation_dir = 1
+		
+		#Only one tankRotation is counted
+		if (tankRotation > PI):
+			tankRotation = -PI + (tankRotation - PI)
+		if (tankRotation < -PI):
+			tankRotation = PI - (tankRotation + PI)
+		
+		tankRotation += rotation_dir * rotDelta
+		updateRotationAnimation()
+	else:
+		velocity = direction.normalized() * speed
 		velocity = move_and_slide(velocity)
 
+
 func updateRotationAnimation():
-	if (tankRotation <= PI/8) || (tankRotation > 7*PI/4) :
-		$AnimationPlayer.current_animation = "vertical"
-	elif (tankRotation <= 3*PI/8):
-		$AnimationPlayer.current_animation = "diagonal_up"
-	elif (tankRotation <= 5*PI/8):
+	if (tankRotation <= -(directions.LEFT.angle()) + PI/8):
 		$AnimationPlayer.current_animation = "horizontal"
-	elif (tankRotation <= 7*PI/8):
+	elif (tankRotation <= directions.UP_LEFT.angle() + PI/8) :
 		$AnimationPlayer.current_animation = "diagonal_down"
-	elif (tankRotation <= PI):
+	elif (tankRotation <= directions.UP.angle() + PI/8):
 		$AnimationPlayer.current_animation = "vertical"
-	elif (tankRotation <= 10*PI/8):
+	elif (tankRotation <= directions.UP_RIGHT.angle() + PI/8):
 		$AnimationPlayer.current_animation = "diagonal_up"
-	elif (tankRotation <= 12*PI/8):
+	elif (tankRotation <= directions.RIGHT.angle() + PI/8):
 		$AnimationPlayer.current_animation = "horizontal"
-	elif (tankRotation <= 14*PI/8):
+	elif (tankRotation <= directions.DOWN_RIGHT.angle() + PI/8):
 		$AnimationPlayer.current_animation = "diagonal_down"
+	elif (tankRotation <= directions.DOWN.angle() + PI/8):
+		$AnimationPlayer.current_animation = "vertical"
+	elif (tankRotation <= directions.DOWN_LEFT.angle() + PI/8):
+		$AnimationPlayer.current_animation = "diagonal_up"
+	elif (tankRotation <= directions.LEFT.angle() + PI/8):
+		$AnimationPlayer.current_animation = "horizontal"
 
 func rotateCannon(angle):
 	$Cannon.rotation = angle
@@ -153,5 +100,6 @@ func plantMine():
 		mine.position = position
 		get_node("/root/Main").add_child(mine)
 		liveMines.append(mine)
+
 func destroy():
 	queue_free()

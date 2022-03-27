@@ -10,22 +10,23 @@ func _physics_process(delta):
 	
 	var tankDirection
 	if (Input.is_action_pressed("move_up") && Input.is_action_pressed("move_right")):
-		tankDirection = $PlayerTank.Direction.UP_RIGHT
+		tankDirection = $PlayerTank.directions.UP_RIGHT
 	elif (Input.is_action_pressed("move_down") && Input.is_action_pressed("move_left")):
-		tankDirection = $PlayerTank.Direction.DOWN_LEFT
+		tankDirection = $PlayerTank.directions.DOWN_LEFT
 	elif (Input.is_action_pressed("move_up") && Input.is_action_pressed("move_left")):
-		tankDirection = $PlayerTank.Direction.UP_LEFT
+		tankDirection = $PlayerTank.directions.UP_LEFT
 	elif Input.is_action_pressed("move_down") && Input.is_action_pressed("move_right"):
-		tankDirection = $PlayerTank.Direction.DOWN_RIGHT
+		tankDirection = $PlayerTank.directions.DOWN_RIGHT
 	elif Input.is_action_pressed("move_up") :
-		tankDirection = $PlayerTank.Direction.UP
+		tankDirection = $PlayerTank.directions.UP
 	elif Input.is_action_pressed("move_down"):
-		tankDirection = $PlayerTank.Direction.DOWN
+		tankDirection = $PlayerTank.directions.DOWN
 	elif Input.is_action_pressed("move_left"):
-		tankDirection = $PlayerTank.Direction.LEFT
+		tankDirection = $PlayerTank.directions.LEFT
 	elif Input.is_action_pressed("move_right"):
-		tankDirection = $PlayerTank.Direction.RIGHT
-	$PlayerTank.move(delta, tankDirection)
+		tankDirection = $PlayerTank.directions.RIGHT
+	if tankDirection:
+		$PlayerTank.move(delta, tankDirection)
 
 	if Input.is_action_just_pressed("shoot"):
 		$PlayerTank.shoot()

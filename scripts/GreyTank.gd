@@ -7,7 +7,7 @@ var rng
 func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
-	direction = rng.randi_range(0, Direction.size() - 1)
+	direction = directions.values()[(rng.randi_range(0, directions.size() - 1))]
 	pass # Replace with function body.
 
 
@@ -24,8 +24,11 @@ func _physics_process(delta):
 func _on_ChangeDirTimer_timeout():
 	#for i in range [4]:
 		#pass
-	var spaceState = get_world_2d().direct_space_state
+	direction = directions.values()[(rng.randi_range(0, directions.size() - 1))]
+	#var spaceState = get_world_2d().direct_space_state
 	#Replace 1000 with bounds for resolution
-	var result = spaceState.intersect_ray(position, position + Vector2(1,0).rotated(direction)*1000)
-		
-	direction = direction + rng.randi_range(-1, 1) % Direction.size()
+	#var result = spaceState.intersect_ray(position, position + Vector2(1,0).rotated(self.tankRotation)*30)
+	#$Sprite.position = Vector2(1,0).rotated(self.tankRotation)*30
+	#if (result):
+		#print_debug(result)
+	#direction = direction + rng.randi_range(-1, 1) % Direction.size()

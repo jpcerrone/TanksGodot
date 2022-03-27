@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://scenes/BrownTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://sprites/wall1.png" type="Texture" id=4]
@@ -48,9 +49,6 @@ shape = SubResource( 2 )
 position = Vector2( 200, 145.822 )
 z_index = 0
 
-[node name="GreyTank2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 171.34, 74.0415 )
-
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
@@ -87,3 +85,12 @@ texture = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 252.359, 24.0363 )
 texture = ExtResource( 7 )
+
+[node name="BrownTank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 115.596, 106.818 )
+
+[node name="BrownTank2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 340.761, 101.008 )
+
+[node name="GreyTank" parent="." instance=ExtResource( 6 )]
+position = Vector2( 261.348, 86.481 )
