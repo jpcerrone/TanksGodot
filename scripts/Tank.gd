@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 export (int) var speed = 40
 export (float) var rotation_speed = 5.0
-var velocity = Vector2()
 
+var currentDirection: Vector2
 var tankRotation = 0.0
 
 var maxBullets = 1
@@ -59,8 +59,8 @@ func move(delta, direction):
 		tankRotation += rotation_dir * rotDelta
 		updateRotationAnimation()
 	else:
-		velocity = direction.normalized() * speed
-		velocity = move_and_slide(velocity)
+		currentDirection = direction
+		move_and_slide(direction.normalized() * speed)
 
 
 func updateRotationAnimation():

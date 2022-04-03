@@ -16,11 +16,16 @@ texture = ExtResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="ChangeDirTimer" type="Timer" parent="." index="5"]
+wait_time = 1.5
 autostart = true
 
 [node name="Sprite" type="Sprite" parent="." index="6"]
-visible = false
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 5 )
 
+[node name="CollisionCheckTimer" type="Timer" parent="." index="7"]
+wait_time = 0.2
+autostart = true
+
 [connection signal="timeout" from="ChangeDirTimer" to="." method="_on_ChangeDirTimer_timeout"]
+[connection signal="timeout" from="CollisionCheckTimer" to="." method="_on_CollisionCheckTimer_timeout"]
