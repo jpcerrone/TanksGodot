@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://scenes/BrownTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://sprites/wall1.png" type="Texture" id=4]
@@ -43,6 +44,12 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 15.6609, 135.433 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 250, 135.433 )
+scale = Vector2( -0.928216, 0.412293 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
@@ -94,23 +101,26 @@ texture = ExtResource( 4 )
 position = Vector2( 252.359, 24.0363 )
 texture = ExtResource( 7 )
 
+[node name="GreyTank4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 342.738, 76.9603 )
+
 [node name="GreyTank" parent="." instance=ExtResource( 6 )]
-position = Vector2( 261.348, 86.481 )
+position = Vector2( 90.3883, 95.0777 )
 
 [node name="GreyTank2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 81.1938, 213.569 )
+position = Vector2( 133.956, 178.332 )
 
 [node name="GreyTank3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 76.2526, 104.863 )
-
-[node name="GreyTank4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 249.687, 206.157 )
+position = Vector2( 349.209, 191.704 )
 
 [node name="GreyTank5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 311.452, 155.757 )
+position = Vector2( 373.366, 156.332 )
 
 [node name="GreyTank6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 363.828, 93.9929 )
+position = Vector2( 285.519, 117.015 )
 
-[node name="GreyTank7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 374.204, 202.204 )
+[node name="BrownTank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 155.094, 86.019 )
+
+[node name="BrownTank2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 343.17, 131.313 )
