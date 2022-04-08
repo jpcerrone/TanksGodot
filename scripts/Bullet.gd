@@ -39,3 +39,6 @@ func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()
 	explosion.position = colliderPosition
 	get_node("/root/Main").add_child(explosion)
+
+func getCollisionShapeExtents():
+	return $CollisionShape2D.shape.extents
