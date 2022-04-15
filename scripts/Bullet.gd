@@ -11,7 +11,7 @@ func _ready():
 
 func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	position = initialPosition
-	self.velocity = initialVelocity
+	self.velocity = initialVelocity.normalized()
 	currentRebounds = 0
 	self.rotation = initialVelocity.angle()
 

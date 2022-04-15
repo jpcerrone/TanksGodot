@@ -89,7 +89,7 @@ func rotateCannon(angle):
 func shoot():
 	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
 		var bullet = Bullet.instance()
-		bullet.setup(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
+		bullet.setup(getCannonTipPosition(), Vector2(50,0).rotated($Cannon.rotation))
 		get_node("/root/Main").add_child(bullet)
 		liveBullets.append(bullet)
 	
@@ -101,7 +101,7 @@ func plantMine():
 		liveMines.append(mine)
 
 func getCannonTipPosition():
-	return position + Vector2($Cannon.texture.get_size().x, 0).rotated($Cannon.rotation)
+	return position + $Cannon.position + Vector2(10,0).rotated($Cannon.rotation)
 
 func destroy():
 	queue_free()

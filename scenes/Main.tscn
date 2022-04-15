@@ -5,8 +5,8 @@
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://sprites/valla-lat.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
-[ext_resource path="res://sprites/valla.png" type="Texture" id=6]
 [ext_resource path="res://sprites/versailles.png" type="Texture" id=7]
+[ext_resource path="res://sprites/valla.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 228.466, 10 )
@@ -20,9 +20,7 @@ extents = Vector2( 15.8001, 158.239 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="Area2D" type="RigidBody2D" parent="." groups=[
-"walls",
-]]
+[node name="Area2D" type="RigidBody2D" parent="." groups=["walls"]]
 mode = 1
 mass = 0.00102041
 
@@ -58,9 +56,7 @@ modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 469.452, 134.658 )
 shape = SubResource( 3 )
 
-[node name="PlayerTank" parent="." groups=[
-"player",
-] instance=ExtResource( 2 )]
+[node name="PlayerTank" parent="." groups=["player"] instance=ExtResource( 2 )]
 position = Vector2( 200, 145.822 )
 z_index = 0
 
@@ -84,7 +80,7 @@ margin_top = 26.0
 margin_right = 453.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 75.2906, 31.864 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -96,7 +92,7 @@ margin_top = 239.95
 margin_right = 453.0
 margin_bottom = 251.95
 rect_pivot_offset = Vector2( 75.2906, 31.864 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -128,5 +124,6 @@ __meta__ = {
 position = Vector2( 252.359, 24.0363 )
 texture = ExtResource( 7 )
 
-[node name="BrownTank" parent="." instance=ExtResource( 1 )]
+[node name="BrownTank" parent="." groups=["destroyable"] instance=ExtResource( 1 )]
 position = Vector2( 314.31, 119.409 )
+z_index = 1
