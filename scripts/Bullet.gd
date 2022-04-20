@@ -31,9 +31,17 @@ func _physics_process(delta):
 			if (currentRebounds >= maxRebounds):
 				queue_free()
 			else: 
+				#position = collision.position + velocity.bounce(collision.normal)*10
+				#print_debug("preVel",velocity)
 				velocity = velocity.bounce(collision.normal)
+				#print_debug("postvel",velocity)
+				#print_debug("postPos",position)
 				self.rotation = velocity.angle()
 				currentRebounds += 1;
+				update()
+func _draw():
+	draw_circle(Vector2(0,0), 1, Color(255, 255, 0))
+	
 
 func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()

@@ -6,12 +6,15 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 2 )
 
-[node name="Bullet" type="KinematicBody2D" groups=["destroyable"]]
+[node name="Bullet" type="KinematicBody2D" groups=[
+"destroyable",
+]]
 collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
