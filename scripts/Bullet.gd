@@ -1,5 +1,7 @@
 extends KinematicBody2D
+
 var Explosion = preload("res://scenes/Explosion.tscn")
+var Ricochet = preload("res://scenes/Ricochet.tscn")
 
 const speed = 150.0
 const maxRebounds = 1
@@ -34,6 +36,10 @@ func _physics_process(delta):
 				velocity = velocity.bounce(collision.normal)
 				self.rotation = velocity.angle()
 				currentRebounds += 1;
+				var ricochet = Ricochet.instance()
+				ricochet.position = position
+				ricochet.rotate(collision.normal.angle())
+				get_node("/root/Main").add_child(ricochet)
 
 func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()
