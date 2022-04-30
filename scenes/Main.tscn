@@ -31,36 +31,29 @@ mass = 0.00102041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 244.005, 27.8089 )
+position = Vector2( 244.168, 27.8089 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 252.721, 30.6931 )
+position = Vector2( 252.021, 31.6942 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 242.122, 259.827 )
+position = Vector2( 242.638, 261.15 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 17.2523, 135.035 )
+position = Vector2( 18.2749, 135.035 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 466.646, 134.658 )
+position = Vector2( 466.893, 134.782 )
 scale = Vector2( 1.6, 11.36 )
 shape = SubResource( 4 )
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 250, 135.433 )
-scale = Vector2( -0.928216, 0.412293 )
-shape = SubResource( 3 )
-disabled = true
 
 [node name="PlayerTank" parent="." groups=[
 "player",
@@ -82,7 +75,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Wall2" type="TextureRect" parent="Background"]
+[node name="BrownTank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 314.31, 119.409 )
+
+[node name="Props" type="CanvasLayer" parent="."]
+
+[node name="Wall2" type="TextureRect" parent="Props"]
 margin_left = 32.0
 margin_top = 26.0
 margin_right = 453.0
@@ -94,7 +92,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Wall3" type="TextureRect" parent="Background"]
+[node name="Wall3" type="TextureRect" parent="Props"]
 margin_left = 32.0
 margin_top = 239.95
 margin_right = 453.0
@@ -106,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
+[node name="TextureRect" type="TextureRect" parent="Props"]
 margin_left = 32.0
 margin_top = 38.0
 margin_right = 34.0
@@ -117,7 +115,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="Background"]
+[node name="TextureRect2" type="TextureRect" parent="Props"]
 margin_left = 451.0
 margin_top = 38.0
 margin_right = 453.0
@@ -128,12 +126,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 252.359, 24.0363 )
+[node name="Sprite" type="Sprite" parent="Props"]
+position = Vector2( 252.359, 26.6435 )
 texture = ExtResource( 7 )
-
-[node name="BrownTank" parent="." groups=[
-"destroyable",
-] instance=ExtResource( 1 )]
-position = Vector2( 314.31, 119.409 )
-z_index = 1

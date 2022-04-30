@@ -22,7 +22,6 @@ func _physics_process(delta):
 	if(okToShoot):
 		DEBUG_LINES.clear()
 		
-		var spaceState = get_world_2d().direct_space_state
 		#Replace 1000 with bounds for resolution
 		#var result = spaceState.intersect_ray(cannonTipPos, cannonTipPos + Vector2(1,0).rotated($Cannon.rotation)*1000, [self])
 		var result = castBullet(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
@@ -36,13 +35,8 @@ func _physics_process(delta):
 				var dirVector = Vector2(1,0).rotated($Cannon.rotation)
 				# newOrigin will substract bullets size to better allign with bounce
 				var newOrigin = result.position - dirVector.normalized()*Bullet.instance().getCollisionShapeExtents().x
-				#DEBUG_BULL_COLLISION = newOrigin
 				var newResult = castBullet(newOrigin, dirVector.bounce(result.normal))
-				#var newResult = spaceState.intersect_ray(newOrigin, newOrigin + dirVector.bounce(result.normal)*1000, [self])
-
 				if(newResult && newResult.collider.is_in_group('player')):
-					#DEBUG_LINES.clear()
-
 					shoot()
 					okToShoot = false
 
@@ -71,24 +65,11 @@ func castBullet(origin: Vector2, bulletDir):
 		var raycast = spaceState.intersect_ray(initPoint + position, endPoint + position)
 		DEBUG_LINES.append([initPoint, endPoint])
 		if raycast:
-			if (raycast.position.distance_squared_to(origin) < closestRayCollisionDistance):
+			if (raycast.position.distance_to(origin) < closestRayCollisionDistance):
 				closestRayCollisionDistance = abs(raycast.position.distance_to(origin))
 				closestRayCollision = raycast
 				closestRayOffest = raycast.position.distance_to(initPoint+position)
-#	for i in range (raycasts.size()):
-#		if (raycasts[i].position.distance_squared_to(origin) < closestRayCollisionDistance):
-#			closestRayCollisionDistance = abs(raycasts[i].position.distance_to(origin))
-#			closestRayCollision = raycasts[i]
-#			closestRayOffest = raycasts[i].position - 
-	#for ray in raycasts:
-#		if (ray.position.distance_squared_to(origin) < closestRayCollisionDistance):
-#			closestRayCollisionDistance = abs(ray.position.distance_to(origin))
-#			closestRayCollision = ray
-#			closestRayOffest = ray.position
-	#print_debug(closestRayCollisionDistance)
-	#closestRayCollision.position += closestRayOffest
 	closestRayCollision.position = origin + Vector2(1,0).rotated(bulletDir.angle())*closestRayOffest
-	update()
-	#print_debug("RAY",closestRayOffest)
+	#update() (for debugging)
 	return closestRayCollision
 
