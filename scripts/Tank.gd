@@ -101,7 +101,7 @@ func plantMine():
 		liveMines.append(mine)
 
 func getCannonTipPosition():
-	return position + Vector2($Cannon.texture.get_size().x, 0).rotated($Cannon.rotation)
+	return position + $Cannon.position + Vector2(15,0).rotated($Cannon.rotation)
 
 func destroy():
 	queue_free()

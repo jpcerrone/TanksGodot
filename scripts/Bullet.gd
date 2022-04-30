@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var Explosion = preload("res://scenes/Explosion.tscn")
 var Ricochet = preload("res://scenes/Ricochet.tscn")
+var Smoke = preload("res://scenes/Smoke.tscn")
 
 const speed = 150.0
 const maxRebounds = 1
@@ -13,7 +14,7 @@ func _ready():
 
 func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	position = initialPosition
-	self.velocity = initialVelocity
+	self.velocity = initialVelocity.normalized()
 	currentRebounds = 0
 	self.rotation = initialVelocity.angle()
 
@@ -31,17 +32,35 @@ func _physics_process(delta):
 				createExplosion(collision.collider.position)
 		else:
 			if (currentRebounds >= maxRebounds):
+				#Smoke
+				var smoke = Smoke.instance()
+				smoke.position = position
+				get_node("/root/Main").add_child(smoke)
 				queue_free()
 			else: 
+				#position = collision.position + velocity.bounce(collision.normal)*10
+				#print_debug("preVel",velocity)
 				velocity = velocity.bounce(collision.normal)
+				#print_debug("postvel",velocity)
+				#print_debug("postPos",position)
 				self.rotation = velocity.angle()
 				currentRebounds += 1;
+				
+				#Ricochet
 				var ricochet = Ricochet.instance()
-				ricochet.position = position
+				ricochet.position = position - collision.normal*$CollisionShape2D.shape.extents.x
 				ricochet.rotate(collision.normal.angle())
 				get_node("/root/Main").add_child(ricochet)
+
+				update()
+func _draw():
+	draw_circle(Vector2(0,0), 1, Color(255, 255, 0))
+
 
 func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()
 	explosion.position = colliderPosition
 	get_node("/root/Main").add_child(explosion)
+
+func getCollisionShapeExtents():
+	return $CollisionShape2D.shape.extents

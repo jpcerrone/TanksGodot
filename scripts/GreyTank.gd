@@ -28,7 +28,6 @@ func _on_ChangeDirTimer_timeout():
 	var posibleDirections = []
 	for i in range(currentDirectionIndex-1, currentDirectionIndex+2):
 		var result = spaceState.intersect_ray(position, position + directions.values()[i%directions.size()]*40, [self])
-		#$Sprite.position = directions.values()[i%directions.size()]*40
 		if (!result):
 			posibleDirections.append(directions.values()[i%directions.size()])
 
