@@ -1,6 +1,7 @@
 extends "res://scripts/Tank.gd"
 
 var rotationDirection = 1
+var cannonRotSpeed = 1.0
 var rng
 var okToShoot
 
@@ -18,7 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 
-	$Cannon.rotation += delta * rotationDirection
+	$Cannon.rotation += delta * rotationDirection * cannonRotSpeed
 	if(okToShoot):
 		DEBUG_LINES.clear()
 		
@@ -46,10 +47,11 @@ func _on_ShootingTimer_timeout():
 	$ShootingTimer.wait_time = rng.randf_range(0, 5.0)
 	
 func _draw():
-	for i in DEBUG_LINES:
-		draw_line(i[0], i[1], Color(255, 0, 0), 1)
-	draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
-	draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
+	#for i in DEBUG_LINES:
+		#draw_line(i[0], i[1], Color(255, 0, 0), 1)
+	#draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
+	#draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
+	pass
 
 func castBullet(origin: Vector2, bulletDir):
 	var spaceState = get_world_2d().direct_space_state

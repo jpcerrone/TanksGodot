@@ -1,6 +1,7 @@
 extends "res://scripts/EnemyTank.gd"
 var rotSpeed = 0.4
 var direction
+
 #var rng
 
 # Called when the node enters the scene tree for the first time.
@@ -9,16 +10,18 @@ func _ready():
 	rng.randomize()
 	direction = directions.values()[(rng.randi_range(0, directions.size() - 1))]
 	$ChangeDirTimer.wait_time = rng.randf_range(1.5, 3.0)
-
+	cannonRotSpeed = 0.3
 
 func _physics_process(delta):
 	var selfToP1Vector = Global.p1Position - position
-	if ($Cannon.rotation < selfToP1Vector.angle()):
-		$Cannon.rotation += delta * rotSpeed
+	var angleToPlayer = Vector2(1,0).rotated($Cannon.rotation).angle_to(selfToP1Vector)
+	if (angleToPlayer > 0):
+		rotationDirection = 1
 	else:
-		$Cannon.rotation -= delta * rotSpeed
+		rotationDirection = -1
 		
 	self.move(delta, direction)
+	
 
 
 func _on_ChangeDirTimer_timeout():
