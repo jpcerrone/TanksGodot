@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/tanks-grey.png" type="Texture" id=4]
 
 [node name="GreyTank" instance=ExtResource( 2 )]
+show_behind_parent = false
 script = ExtResource( 1 )
 
 [node name="Cannon" parent="." index="1"]

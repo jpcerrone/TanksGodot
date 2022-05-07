@@ -4,6 +4,7 @@
 [ext_resource path="res://scripts/EnemyTank.gd" type="Script" id=2]
 
 [node name="EnemyTank" instance=ExtResource( 1 )]
+show_behind_parent = true
 script = ExtResource( 2 )
 
 [node name="ShootingTimer" type="Timer" parent="." index="5"]
