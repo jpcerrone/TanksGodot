@@ -1,9 +1,22 @@
-extends Node2D
-
+extends TileMap
+const Straw = preload("res://scenes/Straw.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	# Replace straw tiles with straw scenes
+	var straws_h = get_used_cells_by_id(23)
+	for straw in straws_h:
+		set_cellv(straw,-1)
+		var sceneStraw = Straw.instance()
+		sceneStraw.position = straw*16 + Vector2(8,8)
+		sceneStraw.vertical = false
+		get_node("/root/Main").add_child(sceneStraw)
+	var straws_v = get_used_cells_by_id(24)
+	for straw in straws_v:
+		set_cellv(straw,-1)
+		var sceneStraw = Straw.instance()
+		sceneStraw.position = straw*16 + Vector2(8,8)
+		sceneStraw.vertical = true
+		get_node("/root/Main").add_child(sceneStraw)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	$PlayerTank.rotateCannon(get_global_mouse_position().angle_to_point($PlayerTank.position))

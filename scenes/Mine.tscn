@@ -27,6 +27,7 @@ tracks/0/keys = {
 "destroyable",
 "no_explosion",
 ]]
+z_index = -1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
@@ -34,8 +35,6 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="." groups=[
 "destroyable",
 ]]
-z_index = -1
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 2
 
@@ -48,7 +47,9 @@ wait_time = 8.0
 autostart = true
 
 [node name="BlastTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 2.0
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/tick = SubResource( 2 )

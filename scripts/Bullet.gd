@@ -26,10 +26,10 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity*delta*speed)
 	if (collision):
 		if (collision.collider.get_groups().has("destroyable")):
-			collision.collider.destroy()
-			self.destroy()
 			if (!collision.collider.get_groups().has("no_explosion")):
 				createExplosion(collision.collider.position)
+			collision.collider.destroy()
+			self.destroy()
 		else:
 			if (currentRebounds >= maxRebounds):
 				#Smoke
