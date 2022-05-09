@@ -38,9 +38,14 @@ func _physics_process(delta):
 		tankDirection = $PlayerTank.directions.LEFT
 	elif Input.is_action_pressed("move_right"):
 		tankDirection = $PlayerTank.directions.RIGHT
-	if tankDirection:
-		$PlayerTank.move(delta, tankDirection)
 
+	if tankDirection:
+		if (!$PlayerTank/MovingSound.playing):
+			$PlayerTank/MovingSound.playing = true
+		$PlayerTank.move(delta, tankDirection)
+	else:
+		$PlayerTank/MovingSound.playing = false
+		
 	if Input.is_action_just_pressed("shoot"):
 		$PlayerTank.shoot()
 		

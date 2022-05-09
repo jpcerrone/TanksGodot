@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://scenes/GreyTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/PlayerTank.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://sprites/valla-lat.png" type="Texture" id=4]
@@ -267,7 +268,7 @@ script = ExtResource( 5 )
 [node name="PlayerTank" parent="." groups=[
 "player",
 ] instance=ExtResource( 2 )]
-position = Vector2( 243.045, 96.7188 )
+position = Vector2( 412.633, 145.32 )
 
 [node name="Area2D" type="RigidBody2D" parent="." groups=[
 "walls",
@@ -349,3 +350,12 @@ __meta__ = {
 [node name="Palace" type="Sprite" parent="."]
 position = Vector2( 240.324, 32.2977 )
 texture = ExtResource( 7 )
+
+[node name="GreyTank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 85.7136, 93.875 )
+
+[node name="GreyTank2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 82.6114, 196.248 )
+
+[node name="GreyTank3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 216.524, 144.545 )
