@@ -1,5 +1,7 @@
 extends "res://scripts/Tank.gd"
 
+var RayCastUtils = preload("res://scripts/RayCastUtils.gd")
+
 var rotationDirection = 1
 var cannonRotSpeed = 1.0
 var rng
@@ -47,31 +49,33 @@ func _on_ShootingTimer_timeout():
 	$ShootingTimer.wait_time = rng.randf_range(0, 5.0)
 	
 func _draw():
-	#for i in DEBUG_LINES:
-		#draw_line(i[0], i[1], Color(255, 0, 0), 1)
-	#draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
-	#draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
+	for i in DEBUG_LINES:
+		draw_line(i[0], i[1], Color(255, 0, 0), 1)
+	draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
+	draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
 	pass
 
 func castBullet(origin: Vector2, bulletDir):
-	var spaceState = get_world_2d().direct_space_state
-	var bulletYExtent = Bullet.instance().getCollisionShapeExtents().y
-	var rayPositions = [-bulletYExtent, 0, bulletYExtent]
-
-	var closestRayCollisionDistance = Global.MAX_INT
-	var closestRayCollision
-	var closestRayOffest = 0
-	for p in rayPositions:
-		var initPoint = origin + Vector2(0,p).rotated(bulletDir.angle()) - position
-		var endPoint = initPoint + bulletDir*1000
-		var raycast = spaceState.intersect_ray(initPoint + position, endPoint + position)
-		DEBUG_LINES.append([initPoint, endPoint])
-		if raycast:
-			if (raycast.position.distance_to(origin) < closestRayCollisionDistance):
-				closestRayCollisionDistance = abs(raycast.position.distance_to(origin))
-				closestRayCollision = raycast
-				closestRayOffest = raycast.position.distance_to(initPoint+position)
-	closestRayCollision.position = origin + Vector2(1,0).rotated(bulletDir.angle())*closestRayOffest
-	#update() (for debugging)
-	return closestRayCollision
+	var rc = RayCastUtils.new()
+	return rc.castShape(origin - position, Bullet.instance().getCollisionShape(), bulletDir)
+	#	var spaceState = get_world_2d().direct_space_state
+#	var bulletYExtent = Bullet.instance().getCollisionShapeExtents().y
+#	var rayPositions = [-bulletYExtent, 0, bulletYExtent]
+#
+#	var closestRayCollisionDistance = Global.MAX_INT
+#	var closestRayCollision
+#	var closestRayOffest = 0
+#	for p in rayPositions:
+#		var initPoint = origin + Vector2(0,p).rotated(bulletDir.angle()) - position
+#		var endPoint = initPoint + bulletDir*1000
+#		var raycast = spaceState.intersect_ray(initPoint + position, endPoint + position)
+#		DEBUG_LINES.append([initPoint, endPoint])
+#		if raycast:
+#			if (raycast.position.distance_to(origin) < closestRayCollisionDistance):
+#				closestRayCollisionDistance = abs(raycast.position.distance_to(origin))
+#				closestRayCollision = raycast
+#				closestRayOffest = raycast.position.distance_to(initPoint+position)
+#	closestRayCollision.position = origin + Vector2(1,0).rotated(bulletDir.angle())*closestRayOffest
+#	update() #(for debugging)
+#	return closestRayCollision
 
