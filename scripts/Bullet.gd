@@ -66,4 +66,4 @@ func getCollisionShapeExtents():
 	return $CollisionShape2D.shape.extents
 	
 func getCollisionShape():
-	return $CollisionShape2D
+	return $CollisionShape2D.shape
