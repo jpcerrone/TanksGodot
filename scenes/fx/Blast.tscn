@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scripts/Blast.gd" type="Script" id=1]
-[ext_resource path="res://sprites/blast-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://sprites/blast-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Blast.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 29.9627
@@ -43,7 +43,7 @@ tracks/1/keys = {
 [node name="Blast" type="Area2D"]
 z_index = 2
 collision_mask = 3
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2.74593 )
@@ -53,7 +53,7 @@ shape = SubResource( 1 )
 anims/default = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 hframes = 6
 frame = 2
 

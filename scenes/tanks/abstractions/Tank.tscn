@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scripts/Tank.gd" type="Script" id=1]
-[ext_resource path="res://collision_shapes/tankVerticalShape.tres" type="Shape2D" id=2]
-[ext_resource path="res://collision_shapes/tankHorizontalShape.tres" type="Shape2D" id=3]
-[ext_resource path="res://sprites/tanks-blue.png" type="Texture" id=4]
-[ext_resource path="res://sprites/cannon-blue.png" type="Texture" id=5]
+[ext_resource path="res://collision_shapes/tankVerticalShape.tres" type="Shape2D" id=1]
+[ext_resource path="res://collision_shapes/tankHorizontalShape.tres" type="Shape2D" id=2]
+[ext_resource path="res://sprites/tanks-blue.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cannon-blue.png" type="Texture" id=4]
+[ext_resource path="res://scripts/Tank.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "TankMovement"
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Body:frame")
@@ -186,7 +186,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Diagonal_collision:disabled")
@@ -216,22 +216,22 @@ tracks/3/keys = {
 [node name="Tank" type="KinematicBody2D" groups=[
 "destroyable",
 ]]
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.117946 )
-shape = ExtResource( 3 )
+shape = ExtResource( 2 )
 
 [node name="Cannon" type="Sprite" parent="."]
 position = Vector2( 0, -2 )
 z_index = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Body" type="Sprite" parent="."]
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

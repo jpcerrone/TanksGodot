@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-var Explosion = preload("res://scenes/Explosion.tscn")
-var Ricochet = preload("res://scenes/Ricochet.tscn")
-var Smoke = preload("res://scenes/Smoke.tscn")
+var Explosion = preload("res://scenes/fx/Explosion.tscn")
+var Ricochet = preload("res://scenes/fx/Ricochet.tscn")
+var Smoke = preload("res://scenes/fx/Smoke.tscn")
 
-const speed = 150.0
-const maxRebounds = 1
+export var speed = 150.0
+export var maxRebounds = 1
 var currentRebounds
 var velocity = Vector2()
 # Called when the node enters the scene tree for the first time.

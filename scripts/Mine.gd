@@ -1,6 +1,6 @@
 extends Node2D
 
-var Blast = preload("res://scenes/Blast.tscn")
+var Blast = preload("res://scenes/fx/Blast.tscn")
 
 var exploding = false
 

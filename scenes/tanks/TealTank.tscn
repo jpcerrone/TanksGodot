@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/tanks/abstractions/MovingTank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/FastBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/tanks-teal.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cannon-teal.png" type="Texture" id=4]
+
+[node name="TealTank" instance=ExtResource( 1 )]
+speed = 20
+Bullet = ExtResource( 2 )
+
+[node name="Cannon" parent="." index="1"]
+texture = ExtResource( 4 )
+
+[node name="Body" parent="." index="2"]
+texture = ExtResource( 3 )

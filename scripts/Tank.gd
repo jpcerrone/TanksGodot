@@ -3,6 +3,7 @@ extends KinematicBody2D
 export (int) var speed = 40
 export (float) var rotation_speed = 5.0
 
+
 var currentDirection: Vector2
 var tankRotation = 0.0
 
@@ -12,9 +13,9 @@ var maxMines = 0
 var liveBullets = []
 var liveMines = []
 
-const Bullet = preload("res://scenes/Bullet.tscn")
+#const Bullet = preload("res://scenes/Bullet.tscn")
 const Mine = preload("res://scenes/Mine.tscn")
-
+export var Bullet = preload("res://scenes/Bullet.tscn")
 
 var directions = {
 	"UP": Vector2(0,-1),
