@@ -10,5 +10,3 @@ func _ready():
 func _physics_process(_delta):
 	Global.p1Position = position
 
-func destroy(): #redefines destroy
-	get_tree().quit()
