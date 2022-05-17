@@ -18,6 +18,7 @@ config/icon="res://sprites/icon.png"
 
 Global="*res://scripts/Global.gd"
 Utils="*res://scripts/Utils.gd"
+AudioManager="*res://scripts/AudioManager.gd"
 
 [display]
 

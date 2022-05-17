@@ -9,8 +9,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite.play("default")
-	if ($Sound):
-		$Sound.play()
+	AudioManager.play(AudioManager.SOUNDS.SMOKE)
 	pass # Replace with function body.
 
 

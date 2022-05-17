@@ -10,7 +10,7 @@ var currentRebounds
 var velocity = Vector2()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$ShotSound.play()
+	AudioManager.play(AudioManager.SOUNDS.SHOT)
 
 func setup(initialPosition: Vector2, initialVelocity: Vector2):
 	position = initialPosition
@@ -29,6 +29,7 @@ func _physics_process(delta):
 			if (!collision.collider.get_groups().has("no_explosion")):
 				createExplosion(collision.collider.position)
 			collision.collider.destroy()
+			AudioManager.play(AudioManager.SOUNDS.BULLET_SHOT)
 			self.destroy()
 		else:
 			if (currentRebounds >= maxRebounds):
@@ -51,7 +52,7 @@ func _physics_process(delta):
 				ricochet.position = position - collision.normal*$CollisionShape2D.shape.extents.x
 				ricochet.rotate(collision.normal.angle())
 				get_node("/root/Main").add_child(ricochet)
-				$BounceSound.play()
+				AudioManager.play(AudioManager.SOUNDS.BOUNCE)
 				update()
 func _draw():
 	draw_circle(Vector2(0,0), 1, Color(255, 255, 0))

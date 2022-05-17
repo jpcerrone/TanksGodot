@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tank_death.wav-98fd498017ce89f01d75a4194851fc70.sample"
+
+[deps]
+
+source_file="res://sfx/tank_death.wav"
+dest_files=[ "res://.import/tank_death.wav-98fd498017ce89f01d75a4194851fc70.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -100,9 +100,12 @@ func plantMine():
 		mine.position = position
 		get_node("/root/Main").add_child(mine)
 		liveMines.append(mine)
+	else:
+		AudioManager.play(AudioManager.SOUNDS.MINE_CANT)
 
 func getCannonTipPosition():
 	return position + $Cannon.position + Vector2(15,0).rotated($Cannon.rotation)
 
 func destroy():
+	AudioManager.play(AudioManager.SOUNDS.TANK_DEATH)
 	queue_free()

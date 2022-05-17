@@ -2,6 +2,7 @@ extends Area2D
 
 func _ready():
 	$AnimationPlayer.play("default")
+	AudioManager.play(AudioManager.SOUNDS.BLAST)
 
 func _on_Blast_body_entered(body):
 	if body.get_groups().has("destroyable"):
