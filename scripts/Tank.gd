@@ -91,14 +91,14 @@ func shoot():
 	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
 		var bullet = Bullet.instance()
 		bullet.setup(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
-		get_node("/root/Main").add_child(bullet)
+		get_parent().add_child(bullet)
 		liveBullets.append(bullet)
 	
 func plantMine():
 	if (Utils.getNumberOfActiveObjects(liveMines) < maxMines):
 		var mine = Mine.instance()
 		mine.position = position
-		get_node("/root/Main").add_child(mine)
+		get_parent().add_child(mine)
 		liveMines.append(mine)
 	else:
 		AudioManager.play(AudioManager.SOUNDS.MINE_CANT)

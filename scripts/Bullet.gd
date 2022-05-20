@@ -36,7 +36,7 @@ func _physics_process(delta):
 				#Smoke
 				var smoke = Smoke.instance()
 				smoke.position = position
-				get_node("/root/Main").add_child(smoke)
+				get_parent().add_child(smoke)
 				queue_free()
 			else: 
 				#position = collision.position + velocity.bounce(collision.normal)*10
@@ -51,7 +51,7 @@ func _physics_process(delta):
 				var ricochet = Ricochet.instance()
 				ricochet.position = position - collision.normal*$CollisionShape2D.shape.extents.x
 				ricochet.rotate(collision.normal.angle())
-				get_node("/root/Main").add_child(ricochet)
+				get_parent().add_child(ricochet)
 				AudioManager.play(AudioManager.SOUNDS.BOUNCE)
 				update()
 func _draw():
@@ -61,7 +61,7 @@ func _draw():
 func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()
 	explosion.position = colliderPosition
-	get_node("/root/Main").add_child(explosion)
+	get_parent().add_child(explosion)
 
 func getCollisionShapeExtents():
 	return $CollisionShape2D.shape.extents

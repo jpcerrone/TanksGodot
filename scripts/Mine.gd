@@ -14,7 +14,7 @@ func setup(position: Vector2):
 func createBlast():
 	var blast = Blast.instance()
 	blast.position = position
-	get_node("/root/Main").add_child(blast)
+	get_parent().add_child(blast)
 
 func destroy():
 	call_deferred("createBlast")
