@@ -2,8 +2,7 @@ extends "res://scripts/Tank.gd"
 signal player_dies
 # Called when the node enters the scene tree for the first time.
 func _init():
-	maxBullets = 5
-	maxMines = 2
+	pass
 
 func _ready():
 	pass # Replace with function body.

@@ -15,5 +15,8 @@ autostart = true
 wait_time = 0.2
 autostart = true
 
+[node name="MineTimer" type="Timer" parent="." index="8"]
+
 [connection signal="timeout" from="ChangeDirTimer" to="." method="_on_ChangeDirTimer_timeout"]
 [connection signal="timeout" from="CollisionCheckTimer" to="." method="_on_CollisionCheckTimer_timeout"]
+[connection signal="timeout" from="MineTimer" to="." method="_on_MineTimer_timeout"]

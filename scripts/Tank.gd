@@ -7,9 +7,9 @@ export (float) var rotation_speed = 5.0
 var currentDirection: Vector2
 var tankRotation = 0.0
 
-var maxBullets = 1
-var maxMines = 0
-
+export var maxBullets = 1
+export var maxMines = 0
+#var currentMines = 0
 var liveBullets = []
 var liveMines = []
 
@@ -100,8 +100,6 @@ func plantMine():
 		mine.position = position
 		get_parent().add_child(mine)
 		liveMines.append(mine)
-	else:
-		AudioManager.play(AudioManager.SOUNDS.MINE_CANT)
 
 func getCannonTipPosition():
 	return position + $Cannon.position + Vector2(15,0).rotated($Cannon.rotation)

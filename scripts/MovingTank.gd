@@ -13,7 +13,9 @@ func _ready():
 	direction = directions.values()[(rng.randi_range(0, directions.size() - 1))]
 	$ChangeDirTimer.wait_time = rng.randf_range(1.5, 3.0)
 	cannonRotSpeed = 0.3
-
+	if (maxMines > 0):
+		$MineTimer.wait_time = rng.randf_range(2.0, 4.0)
+		$MineTimer.start()
 func _physics_process(delta):
 	var selfToP1Vector = Global.p1Position - position
 	var angleToPlayer = Vector2(1,0).rotated($Cannon.rotation).angle_to(selfToP1Vector)
@@ -73,3 +75,8 @@ func _on_CollisionCheckTimer_timeout():
 					posibleDirections.append(i)
 		if (posibleDirections != []):
 			direction = posibleDirections[(rng.randi_range(0, posibleDirections.size()-1))]
+
+
+func _on_MineTimer_timeout():
+	plantMine()
+	$MineTimer.wait_time = rng.randf_range(2.0, 4.0)

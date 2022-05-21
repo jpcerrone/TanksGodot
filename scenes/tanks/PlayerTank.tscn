@@ -6,6 +6,8 @@
 
 [node name="PlayerTank" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+maxBullets = 5
+maxMines = 2
 
 [node name="MovingSound" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 3 )
