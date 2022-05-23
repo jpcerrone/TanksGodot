@@ -17,6 +17,8 @@ var liveMines = []
 const Mine = preload("res://scenes/Mine.tscn")
 export var Bullet = preload("res://scenes/Bullet.tscn")
 
+
+
 var directions = {
 	"UP": Vector2(0,-1),
 	"UP_RIGHT": Vector2(1,-1),
