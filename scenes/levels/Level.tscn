@@ -76,29 +76,6 @@ points = PoolVector2Array( 0, 7.01042, 11.9286, 6.73003, 12.2389, 7.63102, 12.10
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 0
-9/name = "newWalls.png 9"
-9/texture = ExtResource( 4 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 61, 15, 0, 0 )
-9/tile_mode = 1
-9/autotile/bitmask_mode = 0
-9/autotile/bitmask_flags = [  ]
-9/autotile/icon_coordinate = Vector2( 0, 0 )
-9/autotile/tile_size = Vector2( 32, 32 )
-9/autotile/spacing = 0
-9/autotile/occluder_map = [  ]
-9/autotile/navpoly_map = [  ]
-9/autotile/priority_map = [  ]
-9/autotile/z_index_map = [  ]
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
 13/name = "newWalls.png 13"
 13/texture = ExtResource( 4 )
 13/tex_offset = Vector2( 0, 0 )
@@ -246,6 +223,20 @@ points = PoolVector2Array( 0, 7.01042, 11.9286, 6.73003, 12.2389, 7.63102, 12.10
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 24/z_index = 0
+25/name = "newWalls.png 25"
+25/texture = ExtResource( 4 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 48, 0, 16, 16 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 96.6969, 21.3029 )
