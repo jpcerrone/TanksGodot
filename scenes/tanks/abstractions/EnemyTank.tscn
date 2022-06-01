@@ -10,7 +10,6 @@ show_behind_parent = true
 script = ExtResource( 2 )
 
 [node name="ShootingTimer" type="Timer" parent="." index="5"]
-wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_ShootingTimer_timeout"]

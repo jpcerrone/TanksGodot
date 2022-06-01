@@ -4,7 +4,9 @@ var RayCastUtils = preload("res://scripts/RayCastUtils.gd")
 
 var rotationDirection = 1
 var cannonRotSpeed = 1.0
-var rng
+export var bulletsPerSecond = 0.5
+var rng = RandomNumberGenerator.new()
+var fireRate
 var okToShoot
 
 
@@ -13,11 +15,12 @@ var DEBUG_BULL_COLLISION = Vector2(0,0)
 var DEBUG_BOUNCE_SPOT = Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	fireRate = rng.randf_range((1/bulletsPerSecond) -(1/bulletsPerSecond)/5, (1/bulletsPerSecond) -(1/bulletsPerSecond)/5)
 	okToShoot = false
-	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var directions = [-1,1]
 	rotationDirection = directions[rng.randi_range(0,1)]
+	$ShootingTimer.wait_time = fireRate
 
 func _physics_process(delta):
 
@@ -27,9 +30,9 @@ func _physics_process(delta):
 		#Replace 1000 with bounds for resolution
 		var result = castBullet(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
 		update()
-		DEBUG_BOUNCE_SPOT = result.position
 		#A non normalized result indicates the collision happened inside the collider
 		if (result && result.normal.is_normalized()):
+			DEBUG_BOUNCE_SPOT = result.position
 			if(result.collider.is_in_group('player')):
 				shoot()
 				okToShoot = false
@@ -45,7 +48,7 @@ func _physics_process(delta):
 func _on_ShootingTimer_timeout():
 	if (!okToShoot):
 		okToShoot = true
-	$ShootingTimer.wait_time = rng.randf_range(0, 5.0)
+	$ShootingTimer.wait_time = fireRate
 	
 func _draw():
 #	for i in DEBUG_LINES:

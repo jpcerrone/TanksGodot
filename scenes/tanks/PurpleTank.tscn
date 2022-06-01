@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/tanks-purple.png" type="Texture" id=1]
+[ext_resource path="res://sprites/cannon-purple.png" type="Texture" id=2]
+[ext_resource path="res://scenes/tanks/abstractions/MovingTank.tscn" type="PackedScene" id=3]
+
+[node name="PurpleTank" instance=ExtResource( 3 )]
+maxBullets = 5
+maxMines = 2
+bulletsPerSecond = 2.0
+
+[node name="Cannon" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="Body" parent="." index="2"]
+texture = ExtResource( 1 )
