@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/tanks/PurpleTank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/Level.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/tanks/GrayTank.tscn" type="PackedScene" id=3]
 
 [node name="Level" instance=ExtResource( 2 )]
 
 [node name="PurpleTank" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 400.015, 194.818 )
-
-[node name="GrayTank" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 404.469, 106.624 )
