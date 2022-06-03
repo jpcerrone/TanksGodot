@@ -1,6 +1,6 @@
 extends CanvasItem
 
-static func castShape(origin: Vector2, shape, direction: Vector2, spaceState, rayLength, debugLines, objRef):
+static func castShape(origin: Vector2, shape, direction: Vector2, spaceState, rayLength, debugLines, objRef, colmask = 0b11111111):
 	
 	var shapeYExtent = shape.extents.y
 	var rayPositions = [-shapeYExtent, 0, shapeYExtent]
@@ -11,7 +11,7 @@ static func castShape(origin: Vector2, shape, direction: Vector2, spaceState, ra
 	for p in rayPositions:
 		var initPoint = origin + Vector2(0,p).rotated(direction.angle())
 		var endPoint = initPoint + direction*rayLength
-		var raycast = spaceState.intersect_ray(initPoint, endPoint, [objRef])
+		var raycast = spaceState.intersect_ray(initPoint, endPoint, [objRef], colmask)
 		debugLines.append([initPoint, endPoint])
 		if raycast:
 			if (raycast.position.distance_to(origin) < closestRayCollisionDistance):
