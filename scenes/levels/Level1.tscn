@@ -9,7 +9,5 @@ tile_data = PoolIntArray( 131073, 536870916, 0, 131074, 536870915, 0, 131075, 53
 [node name="PlayerTank" parent="." index="0"]
 position = Vector2( 86.2094, 147.472 )
 
-[node name="BrownTank" parent="." index="2" groups=[
-"destroyable",
-] instance=ExtResource( 2 )]
+[node name="BrownTank" parent="." index="2" instance=ExtResource( 2 )]
 position = Vector2( 390.129, 142.445 )

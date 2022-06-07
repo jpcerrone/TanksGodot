@@ -9,7 +9,6 @@ var rng = RandomNumberGenerator.new()
 var fireRate
 var okToShoot
 
-
 var DEBUG_LINES = []
 var DEBUG_BULL_COLLISION = Vector2(0,0)
 var DEBUG_BOUNCE_SPOT = Vector2(0,0)
@@ -18,9 +17,13 @@ func _ready():
 	fireRate = rng.randf_range((1/bulletsPerSecond) -(1/bulletsPerSecond)/5, (1/bulletsPerSecond) -(1/bulletsPerSecond)/5)
 	okToShoot = false
 	rng.randomize()
-	var directions = [-1,1]
-	rotationDirection = directions[rng.randi_range(0,1)]
 	$ShootingTimer.wait_time = fireRate
+
+	# Point cannon towards player, but add a +-PI/4 offset so that we arent pointing directly towards him but rather close to him instead
+	var orientation = [-1,1]
+	var vecToPlayer = position.direction_to((Global.p1Position))
+	rotationDirection = orientation[rng.randi_range(0,1)]
+	$Cannon.rotation = vecToPlayer.rotated(rotationDirection*PI/4).angle()
 
 func _physics_process(delta):
 
