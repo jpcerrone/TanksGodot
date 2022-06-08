@@ -26,6 +26,9 @@ func _ready():
 		sceneStraw.position = straw*16 + Vector2(8,8)
 		sceneStraw.vertical = true
 		add_child(sceneStraw)
+	$StartTimer.start()
+	get_tree().paused = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if (get_node_or_null("PlayerTank")):
@@ -66,11 +69,21 @@ func checkEnemies():
 	enemies = get_tree().get_nodes_in_group("enemy").size()
 	if (enemies == 1):
 		if (get_parent().name == "Main"):
-			emit_signal("enemies_killed")
+			var nextLevel_timer = Timer.new()
+			nextLevel_timer.wait_time = 2
+			nextLevel_timer.autostart = true
+			nextLevel_timer.connect("timeout", self, "_on_nextLevel_timer_timeout") 
+			add_child(nextLevel_timer)
 		else:
 			get_tree().quit()
 
-func quitLevel():
+func _on_nextLevel_timer_timeout():
+	if (get_parent().name == "Main"):
+		emit_signal("enemies_killed")
+	else:
+		get_tree().quit()
+
+func _on_PlayerTank_player_dies():
 	var death_timer = Timer.new()
 	death_timer.wait_time = 2
 	death_timer.autostart = true
@@ -83,7 +96,5 @@ func _on_death_timer_timeout():
 	else:
 		get_tree().quit()
 
-
-
-func _on_PlayerTank_player_dies():
-	quitLevel()
+func _on_StartTimer_timeout():
+	get_tree().paused = false

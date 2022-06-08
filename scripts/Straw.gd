@@ -8,6 +8,7 @@ func _ready():
 	if !vertical:
 		$AnimationPlayer.play("default_h")
 	else:
+		$AnimatedSprite.animation = "default_v" # To get the default vertical animation before the level begins (Freeze before start makes this necessary)
 		$AnimationPlayer.play("default_v")
 
 func blast():
@@ -15,11 +16,6 @@ func blast():
 		$AnimationPlayer.play("blow_h")
 	else:
 		$AnimationPlayer.play("blow_v")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _on_AnimatedSprite_animation_finished():
 	queue_free()

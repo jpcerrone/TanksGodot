@@ -159,11 +159,11 @@ tracks/2/keys = {
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
@@ -217,12 +217,12 @@ region = Rect2( 96, 16, 16, 16 )
 animations = [ {
 "frames": [ SubResource( 5 ) ],
 "loop": false,
-"name": "default_h",
+"name": "default_v",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ) ],
 "loop": false,
-"name": "default_v",
+"name": "default_h",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
@@ -256,7 +256,7 @@ anims/default_v = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 19 )
-animation = "blow_h"
+animation = "default_h"
 
 [node name="Collision_V" type="CollisionShape2D" parent="."]
 shape = SubResource( 20 )
