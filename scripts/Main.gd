@@ -20,8 +20,11 @@ func restartLevel():
 	currentLevel.queue_free()
 	_addCurrentLevel()
 
+
 func _addCurrentLevel():
 	currentLevel = levels[currentLevelIndex].instance()
 	currentLevel.connect("enemies_killed", self, 'nextLevel')
 	currentLevel.connect("player_died", self, 'restartLevel')
 	add_child(currentLevel)
+	AudioManager.startBGMusic(AudioManager.TRACKS.MAIN)
+

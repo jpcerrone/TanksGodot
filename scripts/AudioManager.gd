@@ -16,6 +16,10 @@ enum SOUNDS {
 	MINE_CANT,
 }
 
+enum TRACKS {
+	MAIN,
+}
+
 func _ready():
 	# Create the pool of AudioStreamPlayer nodes.
 	for i in num_players:
@@ -25,7 +29,6 @@ func _ready():
 		p.connect("finished", self, "_on_stream_finished", [p])
 		p.bus = "master"
 
-
 func _on_stream_finished(stream):
 	# When finished playing a stream, make the player available again.
 	available.append(stream)
@@ -33,6 +36,16 @@ func _on_stream_finished(stream):
 func play(sound):
 	queue.append(sound)
 			
+
+func startBGMusic(track):
+	match(track):
+		TRACKS.MAIN:
+			$BGMusic.stream = load("res://sfx/bg.wav")
+			$BGMusic.volume_db = -5
+			$BGMusic.play()
+
+func stopBGMusic():
+	$BGMusic.stop()
 
 func _process(_delta):
 	# Play a queued sound if any players are available.

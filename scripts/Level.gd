@@ -74,6 +74,7 @@ func checkEnemies():
 			nextLevel_timer.autostart = true
 			nextLevel_timer.connect("timeout", self, "_on_nextLevel_timer_timeout") 
 			add_child(nextLevel_timer)
+			AudioManager.stopBGMusic()
 		else:
 			get_tree().quit()
 
@@ -89,6 +90,7 @@ func _on_PlayerTank_player_dies():
 	death_timer.autostart = true
 	death_timer.connect("timeout", self, "_on_death_timer_timeout") 
 	add_child(death_timer)
+	AudioManager.stopBGMusic()
 
 func _on_death_timer_timeout():
 	if (get_parent().name == "Main"):

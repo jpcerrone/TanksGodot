@@ -298,6 +298,7 @@ texture = ExtResource( 3 )
 
 [node name="StartTimer" type="Timer" parent="."]
 pause_mode = 2
+wait_time = 3.6
 one_shot = true
 
 [connection signal="player_dies" from="PlayerTank" to="." method="_on_PlayerTank_player_dies"]
