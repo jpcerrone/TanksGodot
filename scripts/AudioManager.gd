@@ -17,6 +17,8 @@ enum SOUNDS {
 }
 
 enum TRACKS {
+	WIN,
+	LOSE,
 	MAIN,
 }
 
@@ -43,9 +45,16 @@ func startBGMusic(track):
 			$BGMusic.stream = load("res://sfx/bg.wav")
 			$BGMusic.volume_db = -5
 			$BGMusic.play()
-
-func stopBGMusic():
-	$BGMusic.stop()
+		TRACKS.WIN:
+			if ($BGMusic.stream == load("res://sfx/bg.wav")):  #We don't want this to play when we already lost and the lose sfx is playing
+				$BGMusic.stream = load("res://sfx/win.wav")
+				$BGMusic.volume_db = -5
+				$BGMusic.play()
+		TRACKS.LOSE:
+			if ($BGMusic.stream == load("res://sfx/bg.wav")): #We don't want this to play when we already won and the win sfx is playing
+				$BGMusic.stream = load("res://sfx/lose.wav")
+				$BGMusic.volume_db = -5
+				$BGMusic.play()
 
 func _process(_delta):
 	# Play a queued sound if any players are available.
