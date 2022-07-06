@@ -1,7 +1,8 @@
 extends Node
 var level1 = preload("res://scenes/levels/Level1.tscn")
 var level2 = preload("res://scenes/levels/Level2.tscn")
-var levels = [level1, level2]
+var level4 = preload("res://scenes/levels/Level4.tscn")
+var levels = [level4, level1, level2]
 var currentLevelIndex = -1
 var currentLevel
 # Called when the node enters the scene tree for the first time.

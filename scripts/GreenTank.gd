@@ -20,5 +20,5 @@ func _physics_process(delta):
 					var secondOrigin = newResult.position - secondDirVector.normalized()*Bullet.instance().getCollisionShapeExtents().x
 					var secondResult = castBullet(secondOrigin, secondDirVector.bounce(newResult.normal))
 					if(secondResult && secondResult.collider.is_in_group('player')):
-						shoot()
+						tryToShoot()
 						okToShoot = false

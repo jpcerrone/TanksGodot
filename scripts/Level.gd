@@ -1,16 +1,23 @@
 extends TileMap
 const Straw = preload("res://scenes/Straw.tscn")
 
-var enemies
-
 signal player_died
 signal enemies_killed
+signal level_start
+signal level_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	enemies = get_tree().get_nodes_in_group("enemy")
+	var enemies = get_tree().get_nodes_in_group("enemy")
 	for e in enemies:
 		e.connect("tree_exiting", self, "checkEnemies") 
+	var invisibleEnemies = get_tree().get_nodes_in_group("invisible")
+	for e in invisibleEnemies:
+		# warning-ignore:return_value_discarded
+		self.connect("level_start", e, "fade_in")
+		# warning-ignore:return_value_discarded
+		self.connect("level_end", e, "fade_out")
+
 	# Replace straw tiles with straw scenes
 	var straws_h = get_used_cells_by_id(23)
 	for straw in straws_h:
@@ -60,13 +67,13 @@ func _physics_process(delta):
 			$PlayerTank/MovingSound.playing = false
 			
 		if Input.is_action_just_pressed("shoot"):
-			$PlayerTank.shoot()
+			$PlayerTank.tryToShoot()
 			
 		if Input.is_action_just_pressed("plant_mine"):
-			$PlayerTank.plantMine()
+			$PlayerTank.tryToPlantMine()
 
 func checkEnemies():
-	enemies = get_tree().get_nodes_in_group("enemy").size()
+	var enemies = get_tree().get_nodes_in_group("enemy").size()
 	if (enemies == 1):
 		if (get_parent().name == "Main"):
 			var nextLevel_timer = Timer.new()
@@ -91,7 +98,7 @@ func _on_PlayerTank_player_dies():
 	death_timer.connect("timeout", self, "_on_death_timer_timeout") 
 	add_child(death_timer)
 	AudioManager.startBGMusic(AudioManager.TRACKS.LOSE)
-
+	emit_signal("level_end")
 
 func _on_death_timer_timeout():
 	if (get_parent().name == "Main"):
@@ -101,3 +108,4 @@ func _on_death_timer_timeout():
 
 func _on_StartTimer_timeout():
 	get_tree().paused = false
+	emit_signal("level_start")

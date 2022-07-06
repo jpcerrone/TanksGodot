@@ -78,5 +78,5 @@ func _on_CollisionCheckTimer_timeout():
 
 
 func _on_MineTimer_timeout():
-	plantMine()
+	tryToPlantMine()
 	$MineTimer.wait_time = rng.randf_range(2.0, 4.0)

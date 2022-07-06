@@ -37,7 +37,7 @@ func _physics_process(delta):
 		if (result && result.normal.is_normalized()):
 			DEBUG_BOUNCE_SPOT = result.position
 			if(result.collider.is_in_group('player')):
-				shoot()
+				tryToShoot()
 				okToShoot = false
 			elif(result.collider.is_in_group('walls') && Bullet.instance().maxRebounds == 1):
 				var dirVector = Vector2(1,0).rotated($Cannon.rotation)
@@ -45,7 +45,7 @@ func _physics_process(delta):
 				var newOrigin = result.position - dirVector.normalized()*Bullet.instance().getCollisionShapeExtents().x
 				var newResult = castBullet(newOrigin, dirVector.bounce(result.normal))
 				if(newResult && newResult.collider.is_in_group('player')):
-					shoot()
+					tryToShoot()
 					okToShoot = false
 
 func _on_ShootingTimer_timeout():

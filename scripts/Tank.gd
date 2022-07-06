@@ -90,18 +90,24 @@ func rotateCannon(angle):
 	$Cannon.rotation = angle
 
 func shoot():
+	var bullet = Bullet.instance()
+	bullet.setup(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
+	get_parent().add_child(bullet)
+	liveBullets.append(bullet)
+
+func tryToShoot():
 	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
-		var bullet = Bullet.instance()
-		bullet.setup(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
-		get_parent().add_child(bullet)
-		liveBullets.append(bullet)
+		shoot()
 	
-func plantMine():
+func tryToPlantMine():
 	if (Utils.getNumberOfActiveObjects(liveMines) < maxMines):
-		var mine = Mine.instance()
-		mine.position = position
-		get_parent().add_child(mine)
-		liveMines.append(mine)
+		plantMine()
+
+func plantMine():
+	var mine = Mine.instance()
+	mine.position = position
+	get_parent().add_child(mine)
+	liveMines.append(mine)
 
 func getCannonTipPosition():
 	return position + $Cannon.position + Vector2(15,0).rotated($Cannon.rotation)
