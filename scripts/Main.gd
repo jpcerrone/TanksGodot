@@ -7,24 +7,32 @@ var currentLevelIndex = -1
 var currentLevel
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	AudioManager.connect("intro_finished", self, "unpause")
 	nextLevel()
 
 func nextLevel():
 	currentLevelIndex += 1
 	if currentLevelIndex < levels.size():
 		if currentLevel: currentLevel.queue_free()
+		get_tree().paused = true
+		AudioManager.startBGMusic(AudioManager.TRACKS.INTRO)
 		_addCurrentLevel()
 	else:
 		get_tree().quit()
 
 func restartLevel():
 	currentLevel.queue_free()
+	get_tree().paused = true
+	AudioManager.startBGMusic(AudioManager.TRACKS.REPLAY)
 	_addCurrentLevel()
+
 
 func _addCurrentLevel():
 	currentLevel = levels[currentLevelIndex].instance()
 	currentLevel.connect("enemies_killed", self, 'nextLevel')
 	currentLevel.connect("player_died", self, 'restartLevel')
 	add_child(currentLevel)
-	AudioManager.startBGMusic(AudioManager.TRACKS.MAIN)
+
+func unpause():
+	get_tree().paused = false
 

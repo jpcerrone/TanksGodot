@@ -17,7 +17,7 @@ func _ready():
 		self.connect("level_start", e, "fade_in")
 		# warning-ignore:return_value_discarded
 		self.connect("level_end", e, "fade_out")
-
+	emit_signal("level_start")
 	# Replace straw tiles with straw scenes
 	var straws_h = get_used_cells_by_id(23)
 	for straw in straws_h:
@@ -33,8 +33,6 @@ func _ready():
 		sceneStraw.position = straw*16 + Vector2(8,8)
 		sceneStraw.vertical = true
 		add_child(sceneStraw)
-	$StartTimer.start()
-	get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -105,7 +103,3 @@ func _on_death_timer_timeout():
 		emit_signal("player_died")
 	else:
 		get_tree().quit()
-
-func _on_StartTimer_timeout():
-	get_tree().paused = false
-	emit_signal("level_start")

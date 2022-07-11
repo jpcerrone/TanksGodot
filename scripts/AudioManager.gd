@@ -3,6 +3,10 @@ extends Node
 var num_players = 8
 var available = []  # The available players.
 var queue = []  # The queue of sounds to play.
+var introPlaying = false
+var outroPlaying = false
+
+signal intro_finished
 
 enum SOUNDS {
 	SMOKE,
@@ -19,7 +23,9 @@ enum SOUNDS {
 enum TRACKS {
 	WIN,
 	LOSE,
+	INTRO,
 	MAIN,
+	REPLAY,
 }
 
 func _ready():
@@ -38,23 +44,34 @@ func _on_stream_finished(stream):
 func play(sound):
 	queue.append(sound)
 			
-
 func startBGMusic(track):
 	match(track):
+		TRACKS.INTRO:
+			$BGMusic.stream = load("res://sfx/intro.wav")
+			$BGMusic.volume_db = -5
+			$BGMusic.play()
+			introPlaying = true
 		TRACKS.MAIN:
-			$BGMusic.stream = load("res://sfx/bg.wav")
+			$BGMusic.stream = load("res://sfx/main.wav")
 			$BGMusic.volume_db = -5
 			$BGMusic.play()
 		TRACKS.WIN:
-			if ($BGMusic.stream == load("res://sfx/bg.wav")):  #We don't want this to play when we already lost and the lose sfx is playing
+			if ($BGMusic.stream != load("res://sfx/lose.wav")):  #We don't want this to play when we already lost and the lose sfx is playing
 				$BGMusic.stream = load("res://sfx/win.wav")
 				$BGMusic.volume_db = -5
 				$BGMusic.play()
+				outroPlaying = true
 		TRACKS.LOSE:
-			if ($BGMusic.stream == load("res://sfx/bg.wav")): #We don't want this to play when we already won and the win sfx is playing
+			if ($BGMusic.stream != load("res://sfx/win.wav")): #We don't want this to play when we already won and the win sfx is playing
 				$BGMusic.stream = load("res://sfx/lose.wav")
 				$BGMusic.volume_db = -5
 				$BGMusic.play()
+				outroPlaying = true
+		TRACKS.REPLAY:
+			$BGMusic.stream = load("res://sfx/replay.wav")
+			$BGMusic.volume_db = -5
+			$BGMusic.play()
+			introPlaying = true
 
 func _process(_delta):
 	# Play a queued sound if any players are available.
@@ -94,3 +111,13 @@ func _process(_delta):
 				available[0].volume_db = -5
 		available[0].play()
 		available.pop_front()
+
+func _on_BGMusic_finished():
+	if (introPlaying):
+		emit_signal("intro_finished")
+		introPlaying = false
+		startBGMusic(TRACKS.MAIN)
+	elif (outroPlaying):
+		outroPlaying = false
+	else:
+		startBGMusic(TRACKS.INTRO)
