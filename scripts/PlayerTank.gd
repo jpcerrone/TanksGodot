@@ -9,6 +9,7 @@ func _ready():
 
 func _physics_process(_delta):
 	Global.p1Position = position
+	rotateCannon(get_global_mouse_position().angle_to_point(position))
 
 func destroy():
 	emit_signal("player_dies")

@@ -36,9 +36,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if (get_node_or_null("PlayerTank")):
-		$PlayerTank.rotateCannon(get_global_mouse_position().angle_to_point($PlayerTank.position))
-		
+	if (get_node_or_null("PlayerTank")):		
 		var tankDirection
 		if (Input.is_action_pressed("move_up") && Input.is_action_pressed("move_right")):
 			tankDirection = $PlayerTank.directions.UP_RIGHT
