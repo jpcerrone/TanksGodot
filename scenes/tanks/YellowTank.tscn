@@ -5,7 +5,7 @@
 [ext_resource path="res://sprites/tanks-yellow.png" type="Texture" id=3]
 
 [node name="YellowTank" instance=ExtResource( 1 )]
-maxMines = 5
+maxMines = 2
 
 [node name="Cannon" parent="." index="1"]
 texture = ExtResource( 2 )

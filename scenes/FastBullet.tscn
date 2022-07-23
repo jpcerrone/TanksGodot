@@ -7,7 +7,7 @@
 extents = Vector2( 4.05635, 1.98556 )
 
 [node name="FastBullet" instance=ExtResource( 1 )]
-speed = 200.0
+speed = 300.0
 maxRebounds = 0
 
 [node name="Sprite" parent="." index="0"]

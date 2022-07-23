@@ -11,7 +11,7 @@
 script = ExtResource( 4 )
 speed = 20
 maxBullets = 5
-maxMines = 2
+maxMines = 1
 
 [node name="Cannon" parent="." index="1"]
 texture = ExtResource( 2 )

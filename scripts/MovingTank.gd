@@ -2,11 +2,11 @@ extends "res://scripts/EnemyTank.gd"
 
 
 var rotSpeed = 0.4
-var collisionCheckDistance = 30
+var collisionCheckDistance = 20
 var direction
 
 var changeDirTimes = [1.5, 3.0]
-var mineTimes = [4.0, 8.0]
+var mineTimes = [2.0, 4.0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -5,8 +5,9 @@
 [ext_resource path="res://scenes/tanks/abstractions/MovingTank.tscn" type="PackedScene" id=3]
 
 [node name="PurpleTank" instance=ExtResource( 3 )]
+speed = 60
 maxBullets = 5
-maxMines = 2
+maxMines = 1
 bulletsPerSecond = 2.0
 
 [node name="Cannon" parent="." index="1"]

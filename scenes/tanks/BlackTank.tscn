@@ -9,7 +9,6 @@
 speed = 60
 rotation_speed = 10.0
 maxBullets = 2
-maxMines = 2
 Bullet = ExtResource( 4 )
 bulletsPerSecond = 1.0
 

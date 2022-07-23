@@ -1,12 +1,22 @@
 extends Node
-var level1 = preload("res://scenes/levels/Level1.tscn")
-var level2 = preload("res://scenes/levels/Level2.tscn")
-var level4 = preload("res://scenes/levels/Level4.tscn")
-var levels = [level4, level1, level2]
+var levels = []
 var currentLevelIndex = -1
 var currentLevel
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Get levels
+	var levelsdir = Directory.new()
+	levelsdir.open("res://scenes//levels")
+	levelsdir.list_dir_begin(true, true)
+	var levelStringFormat = levelsdir.get_current_dir() + "/%s"
+	var level = levelsdir.get_next() # Getting first file
+	level = levelsdir.get_next() # Ignoring "Level.tscn"
+	while(level != ""):
+		var levelString = levelStringFormat % level
+		var loadedLevel = load(levelString)
+		levels.append(loadedLevel)
+		level = levelsdir.get_next()
+	
 	AudioManager.connect("intro_finished", self, "unpause")
 	nextLevel()
 
