@@ -68,6 +68,9 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("plant_mine"):
 			$PlayerTank.tryToPlantMine()
 
+		if Input.is_action_just_pressed("quit"):
+			get_tree().quit()
+
 func checkEnemies():
 	var enemies = get_tree().get_nodes_in_group("enemy").size()
 	if (enemies == 1):
