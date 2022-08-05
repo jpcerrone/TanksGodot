@@ -8,3 +8,9 @@ tile_data = PoolIntArray( 131073, 536870916, 0, 131074, 536870915, 0, 131075, 53
 
 [node name="BlackTank" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 345.663, 133.64 )
+
+[node name="BlackTank2" parent="." index="3" instance=ExtResource( 1 )]
+position = Vector2( 345.035, 147.7 )
+
+[node name="BlackTank3" parent="." index="4" instance=ExtResource( 1 )]
+position = Vector2( 344.547, 119.884 )

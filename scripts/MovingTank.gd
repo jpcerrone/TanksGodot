@@ -1,7 +1,6 @@
 extends "res://scripts/EnemyTank.gd"
 
 
-var rotSpeed = 0.4
 var collisionCheckDistance = 20
 var direction
 
@@ -14,7 +13,7 @@ func _ready():
 	rng.randomize()
 	direction = directions.values()[(rng.randi_range(0, directions.size() - 1))]
 	$ChangeDirTimer.wait_time = rng.randf_range(changeDirTimes[0], changeDirTimes[1])
-	cannonRotSpeed = 0.3
+	cannonRotSpeed = 0.4
 	if (maxMines > 0):
 		$MineTimer.wait_time = rng.randf_range(mineTimes[0], mineTimes[1])
 		$MineTimer.start()

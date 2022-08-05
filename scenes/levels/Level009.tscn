@@ -12,20 +12,17 @@ tile_data = PoolIntArray( 131077, 536870916, 0, 131078, 536870915, 0, 131079, 53
 [node name="TealTank" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( 411.702, 73.3247 )
 
-[node name="TealTank2" parent="." index="3" instance=ExtResource( 4 )]
-position = Vector2( 387.488, 149.49 )
-
-[node name="TealTank3" parent="." index="4" instance=ExtResource( 4 )]
+[node name="TealTank3" parent="." index="3" instance=ExtResource( 4 )]
 position = Vector2( 431.513, 193.956 )
 
-[node name="YellowTank" parent="." index="5" instance=ExtResource( 2 )]
+[node name="YellowTank" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 280.505, 215.528 )
 
-[node name="YellowTank2" parent="." index="6" instance=ExtResource( 2 )]
+[node name="YellowTank2" parent="." index="5" instance=ExtResource( 2 )]
 position = Vector2( 179.245, 210.686 )
 
-[node name="YellowTank3" parent="." index="7" instance=ExtResource( 2 )]
+[node name="YellowTank3" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 246.605, 93.1364 )
 
-[node name="GrayTank" parent="." index="8" instance=ExtResource( 3 )]
+[node name="GrayTank" parent="." index="7" instance=ExtResource( 3 )]
 position = Vector2( 349.185, 117.791 )

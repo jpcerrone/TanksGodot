@@ -11,6 +11,10 @@ func _ready():
 	var levelStringFormat = levelsdir.get_current_dir() + "/%s"
 	var level = levelsdir.get_next() # Getting first file
 	level = levelsdir.get_next() # Ignoring "Level.tscn"
+
+	#Level start hack
+	#for i in 12: level = levelsdir.get_next() # Ignoring Levels
+
 	while(level != ""):
 		var levelString = levelStringFormat % level
 		var loadedLevel = load(levelString)

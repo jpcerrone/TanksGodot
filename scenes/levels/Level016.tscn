@@ -14,3 +14,9 @@ position = Vector2( 286.668, 149.93 )
 
 [node name="PurpleTank2" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 421.828, 213.767 )
+
+[node name="PurpleTank3" parent="." index="4" instance=ExtResource( 2 )]
+position = Vector2( 364.352, 79.283 )
+
+[node name="PurpleTank4" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( 244.585, 191.492 )
