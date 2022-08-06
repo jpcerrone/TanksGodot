@@ -13,10 +13,9 @@ export var maxMines = 0
 var liveBullets = []
 var liveMines = []
 
-#const Bullet = preload("res://scenes/Bullet.tscn")
 const Mine = preload("res://scenes/Mine.tscn")
 export var Bullet = preload("res://scenes/Bullet.tscn")
-
+var bulletInstance = Bullet.instance()
 
 
 var directions = {
@@ -115,3 +114,6 @@ func getCannonTipPosition():
 func destroy():
 	AudioManager.play(AudioManager.SOUNDS.TANK_DEATH)
 	queue_free()
+
+func _exit_tree():
+	bulletInstance.queue_free()

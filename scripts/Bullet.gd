@@ -66,5 +66,5 @@ func createExplosion(colliderPosition):
 func getCollisionShapeExtents():
 	return $CollisionShape2D.shape.extents
 	
-func getCollisionShape():
+func getCollisionShape() -> Shape:
 	return $CollisionShape2D.shape

@@ -13,11 +13,11 @@ func _physics_process(delta):
 			if(result.collider.is_in_group('walls')):
 				var dirVector = Vector2(1,0).rotated($Cannon.rotation)
 				# newOrigin will substract bullets size to better allign with bounce
-				var newOrigin = result.position - dirVector.normalized()*Bullet.instance().getCollisionShapeExtents().x
+				var newOrigin = result.position - dirVector.normalized()*bulletInstance.getCollisionShapeExtents().x
 				var newResult = castBullet(newOrigin, dirVector.bounce(result.normal))
 				if(newResult && newResult.collider.is_in_group('walls')):
 					var secondDirVector = dirVector.bounce(result.normal)
-					var secondOrigin = newResult.position - secondDirVector.normalized()*Bullet.instance().getCollisionShapeExtents().x
+					var secondOrigin = newResult.position - secondDirVector.normalized()*bulletInstance.getCollisionShapeExtents().x
 					var secondResult = castBullet(secondOrigin, secondDirVector.bounce(newResult.normal))
 					if(secondResult && secondResult.collider.is_in_group('player')):
 						tryToShoot()
