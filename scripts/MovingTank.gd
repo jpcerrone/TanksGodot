@@ -7,6 +7,8 @@ var direction
 var changeDirTimes = [1.5, 3.0]
 var mineTimes = [2.0, 4.0]
 
+var dirMask = ~0b1000 # "~" filps the bits to avoids the cannon on layer 4
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng = RandomNumberGenerator.new()
@@ -39,7 +41,7 @@ func _on_ChangeDirTimer_timeout():
 	DEBUG_LINES.clear()
 	for i in range(currentDirectionIndex-1, currentDirectionIndex+2):
 		#DEBUG_LINES.clear()
-		var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, 40, DEBUG_LINES, self)
+		var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, 40, DEBUG_LINES, self, dirMask)
 
 		if (!result):
 			posibleDirections.append(directions.values()[i%directions.size()])
@@ -53,12 +55,12 @@ func _on_CollisionCheckTimer_timeout():
 	var spaceState = get_world_2d().direct_space_state
 	#Summing the array size to be able to get the currentDirectionIndex-1 in case of using the fist direction
 	var currentDirectionIndex = directions.values().find(currentDirection) + directions.values().size()
-	var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[currentDirectionIndex%directions.size()], spaceState, collisionCheckDistance, DEBUG_LINES, self)
+	var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[currentDirectionIndex%directions.size()], spaceState, collisionCheckDistance, DEBUG_LINES, self, dirMask)
 	#update()
 	if result:
 		var posibleDirections = []
 		for i in range(currentDirectionIndex-2, currentDirectionIndex+3):
-			var result2 = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, collisionCheckDistance, DEBUG_LINES, self)
+			var result2 = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, collisionCheckDistance, DEBUG_LINES, self, dirMask)
 			if (!result2):
 				posibleDirections.append(directions.values()[i%directions.size()])
 		#if all 3 directions result in a collision, consider 2 more directions
@@ -68,7 +70,7 @@ func _on_CollisionCheckTimer_timeout():
 			alternativeDirecttions.append(directions.values()[(currentDirectionIndex+3)%directions.size()])
 			alternativeDirecttions.append(directions.values()[(currentDirectionIndex+4)%directions.size()])
 			for i in alternativeDirecttions:
-				var result3 = RayCastUtils.castShape(position, $CollisionShape2D.shape, i, spaceState, collisionCheckDistance, DEBUG_LINES, self)
+				var result3 = RayCastUtils.castShape(position, $CollisionShape2D.shape, i, spaceState, collisionCheckDistance, DEBUG_LINES, self, dirMask)
 				if (!result3):
 					posibleDirections.append(i)
 		if (!posibleDirections.empty()):

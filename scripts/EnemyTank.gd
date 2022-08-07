@@ -62,6 +62,6 @@ func _draw():
 	pass
 
 func castBullet(origin: Vector2, bulletDir):
-	var blastMask = 0b1011 # Blast detection occurs on layer 3 (value 4 0b0100), we want to ignore them when casting bullets, so we zero that bit
+	var blastMask = 0b01111 # Blast detection occurs on layer 3 (value 4 0b0100), we want to ignore them when casting bullets, so we zero that bit
 	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, [], [self], blastMask)
 

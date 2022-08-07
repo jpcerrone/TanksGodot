@@ -42,6 +42,7 @@ tracks/1/keys = {
 
 [node name="Blast" type="Area2D"]
 z_index = 2
+collision_layer = 4
 collision_mask = 3
 script = ExtResource( 2 )
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://collision_shapes/tankVerticalShape.tres" type="Shape2D" id=1]
 [ext_resource path="res://collision_shapes/tankHorizontalShape.tres" type="Shape2D" id=2]
@@ -213,22 +213,19 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4.94707, 1.04446 )
+
 [node name="Tank" type="KinematicBody2D" groups=[
 "destroyable",
 ]]
+collision_layer = 2
+collision_mask = 23
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.117946 )
 shape = ExtResource( 2 )
-
-[node name="Cannon" type="Sprite" parent="."]
-position = Vector2( 0, -2 )
-z_index = 1
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -245,3 +242,18 @@ anims/vertical = SubResource( 5 )
 scale = Vector2( -1, 1 )
 polygon = PoolVector2Array( -6.87048, 0.684448, -7.41272, -1.59299, -1.99023, -7.0155, 1.15485, -6.90704, 7.01111, -1.15918, 7.22803, 1.55206, 2.02246, 6.86612, -0.905701, 7.19147 )
 disabled = true
+
+[node name="Cannon" type="Area2D" parent="."]
+position = Vector2( 0, -2 )
+collision_layer = 8
+
+[node name="CannonSprite" type="Sprite" parent="Cannon"]
+z_index = 1
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cannon"]
+position = Vector2( 4.95963, 0.0128059 )
+shape = SubResource( 6 )

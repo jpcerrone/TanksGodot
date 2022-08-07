@@ -95,8 +95,9 @@ func shoot():
 	liveBullets.append(bullet)
 
 func tryToShoot():
-	if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
-		shoot()
+	if ($Cannon.get_overlapping_bodies().empty()): # Check if cannon within a wall
+		if (Utils.getNumberOfActiveObjects(liveBullets) < maxBullets):
+			shoot()
 	
 func tryToPlantMine():
 	if (Utils.getNumberOfActiveObjects(liveMines) < maxMines):

@@ -411,6 +411,8 @@ script = ExtResource( 5 )
 "player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 84.0081, 145.711 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
