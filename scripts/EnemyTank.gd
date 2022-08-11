@@ -57,11 +57,11 @@ func _on_ShootingTimer_timeout():
 func _draw():
 	#for i in DEBUG_LINES:
 		#draw_line(i[0] - position, i[1] - position, Color(255, 0, 0), 1)
-		#draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
-		#draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
+	#draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
+	#draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
 	pass
 
 func castBullet(origin: Vector2, bulletDir):
-	var blastMask = 0b01111 # Blast detection occurs on layer 3 (value 4 0b0100), we want to ignore them when casting bullets, so we zero that bit
-	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, [], [self], blastMask)
+	var blastMask = 0b01111 # Blast detection occurs on layer 5 (value 4 0b10000), we want to ignore them when casting bullets, so we zero that bit
+	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, DEBUG_LINES, [], blastMask)
 

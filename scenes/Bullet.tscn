@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.02049, 2 )
+extents = Vector2( 3, 2 )
 
 [node name="Bullet" type="KinematicBody2D" groups=[
 "destroyable",

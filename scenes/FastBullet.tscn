@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/fastBullet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.05635, 1.98556 )
+extents = Vector2( 4, 2 )
 
 [node name="FastBullet" instance=ExtResource( 1 )]
 speed = 300.0
