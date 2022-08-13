@@ -1,4 +1,4 @@
 [gd_resource type="RectangleShape2D" format=2]
 
 [resource]
-extents = Vector2( 4.95056, 5.92148 )
+extents = Vector2( 5, 6 )

@@ -19,6 +19,7 @@ config/icon="res://sprites/icon.png"
 Global="*res://scripts/Global.gd"
 Utils="*res://scripts/Utils.gd"
 AudioManager="*res://scenes/AudioManager.tscn"
+Debug="*res://scripts/Debug.gd"
 
 [display]
 

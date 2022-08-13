@@ -9,12 +9,14 @@ var rng = RandomNumberGenerator.new()
 var fireRate
 var okToShoot
 
-var DEBUG_LINES = []
-var DEBUG_BULL_COLLISION = Vector2(0,0)
-var DEBUG_BOUNCE_SPOT = Vector2(0,0)
+var BULLET_RAYCAST_LIST: Array
+var DEBUG_BOUNCE_SPOT: Vector2
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
+	if Debug.SHOW_BULLET_RAYCASTS:
+		BULLET_RAYCAST_LIST = []
+		DEBUG_BOUNCE_SPOT = Vector2(0,0)
 	fireRate = rng.randf_range((1/bulletsPerSecond) -(1/bulletsPerSecond)/5, (1/bulletsPerSecond) -(1/bulletsPerSecond)/5)
 	okToShoot = false
 	rng.randomize()
@@ -27,16 +29,14 @@ func _ready():
 	$Cannon.rotation = vecToPlayer.rotated(rotationDirection*PI/4).angle()
 
 func _physics_process(delta):
-
 	$Cannon.rotation += delta * rotationDirection * cannonRotSpeed
 	if(okToShoot):
-		DEBUG_LINES.clear()
+		if Debug.SHOW_BULLET_RAYCASTS: BULLET_RAYCAST_LIST.clear()
 		#Replace 1000 with bounds for resolution
 		var result = castBullet(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
-		update()
 		#A non normalized result indicates the collision happened inside the collider
 		if (result && result.normal.is_normalized()):
-			DEBUG_BOUNCE_SPOT = result.position
+			if Debug.SHOW_BULLET_RAYCASTS: DEBUG_BOUNCE_SPOT = result.position
 			if(result.collider.is_in_group('player')):
 				tryToShoot()
 				okToShoot = false
@@ -48,6 +48,7 @@ func _physics_process(delta):
 				if(newResult && newResult.collider.is_in_group('player')):
 					tryToShoot()
 					okToShoot = false
+	if Debug.SHOW_BULLET_RAYCASTS: update()
 
 func _on_ShootingTimer_timeout():
 	if (!okToShoot):
@@ -55,13 +56,12 @@ func _on_ShootingTimer_timeout():
 	$ShootingTimer.wait_time = fireRate
 	
 func _draw():
-	#for i in DEBUG_LINES:
-		#draw_line(i[0] - position, i[1] - position, Color(255, 0, 0), 1)
-	#draw_circle(DEBUG_BULL_COLLISION - position, 1, Color(255, 255, 0))
-	#draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color(0, 0, 250))
-	pass
+	if Debug.SHOW_BULLET_RAYCASTS:
+		for i in BULLET_RAYCAST_LIST:
+			draw_line(i[0] - position, i[1] - position, Color.red, 1)
+		draw_circle(DEBUG_BOUNCE_SPOT - position, 1, Color.blue)
 
 func castBullet(origin: Vector2, bulletDir):
 	var blastMask = 0b01111 # Blast detection occurs on layer 5 (value 4 0b10000), we want to ignore them when casting bullets, so we zero that bit
-	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, DEBUG_LINES, [], blastMask)
+	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, BULLET_RAYCAST_LIST, [], blastMask)
 
