@@ -10,23 +10,26 @@ signal level_end
 func _ready():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for e in enemies:
-		e.connect("tree_exiting", self, "checkEnemies") 
+		e.connect("tree_exiting", self, "checkIfAllEnemiesKilled") 
+	
 	var invisibleEnemies = get_tree().get_nodes_in_group("invisible")
 	for e in invisibleEnemies:
 		# warning-ignore:return_value_discarded
 		self.connect("level_start", e, "fade_in")
 		# warning-ignore:return_value_discarded
 		self.connect("level_end", e, "fade_out")
+	
 	emit_signal("level_start")
+
 	# Replace straw tiles with straw scenes
-	var straws_h = get_used_cells_by_id(23)
+	var straws_h = get_used_cells_by_id(23) # 23 is the index for straw horizontal
 	for straw in straws_h:
 		set_cellv(straw,-1)
 		var sceneStraw = Straw.instance()
 		sceneStraw.position = straw*16 + Vector2(8,8)
 		sceneStraw.vertical = false
 		add_child(sceneStraw)
-	var straws_v = get_used_cells_by_id(24)
+	var straws_v = get_used_cells_by_id(24) # 24 is the index for straw vertical
 	for straw in straws_v:
 		set_cellv(straw,-1)
 		var sceneStraw = Straw.instance()
@@ -68,7 +71,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("plant_mine"):
 			$PlayerTank.tryToPlantMine()
 
-func checkEnemies():
+func checkIfAllEnemiesKilled():
 	var enemies = get_tree().get_nodes_in_group("enemy").size()
 	if (enemies == 1):
 		if (get_parent().name == "Main"):

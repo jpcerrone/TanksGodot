@@ -8,6 +8,7 @@ export var speed = 150.0
 export var maxRebounds = 1
 var currentRebounds
 var velocity = Vector2()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.play(AudioManager.SOUNDS.SHOT)
@@ -31,32 +32,24 @@ func _physics_process(delta):
 			collision.collider.destroy()
 			AudioManager.play(AudioManager.SOUNDS.BULLET_SHOT)
 			self.destroy()
-		else:
+		else: # Collision with walls
 			if (currentRebounds >= maxRebounds):
-				#Smoke
+				# Smoke
 				var smoke = Smoke.instance()
 				smoke.position = position
 				get_parent().add_child(smoke)
 				queue_free()
 			else: 
-				#position = collision.position + velocity.bounce(collision.normal)*10
-				#print_debug("preVel",velocity)
 				velocity = velocity.bounce(collision.normal)
-				#print_debug("postvel",velocity)
-				#print_debug("postPos",position)
 				self.rotation = velocity.angle()
 				currentRebounds += 1;
 				
-				#Ricochet
+				# Ricochet
 				var ricochet = Ricochet.instance()
 				ricochet.position = position - collision.normal*$CollisionShape2D.shape.extents.x
 				ricochet.rotate(collision.normal.angle())
 				get_parent().add_child(ricochet)
 				AudioManager.play(AudioManager.SOUNDS.BOUNCE)
-				update()
-func _draw():
-	draw_circle(Vector2(0,0), 1, Color(255, 255, 0))
-
 
 func createExplosion(colliderPosition):
 	var explosion = Explosion.instance()

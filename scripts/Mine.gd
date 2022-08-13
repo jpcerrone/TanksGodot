@@ -10,7 +10,6 @@ func _ready():
 func setup(position: Vector2):
 	self.position = position
 
-
 func createBlast():
 	var blast = Blast.instance()
 	blast.position = position

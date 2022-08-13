@@ -56,13 +56,13 @@ func startBGMusic(track):
 			$BGMusic.volume_db = -5
 			$BGMusic.play()
 		TRACKS.WIN:
-			if ($BGMusic.stream != preload("res://sfx/lose.wav")):  #We don't want this to play when we already lost and the lose sfx is playing
+			if ($BGMusic.stream != preload("res://sfx/lose.wav")): # We don't want this to play when we already lost and the lose sfx is playing
 				$BGMusic.stream = preload("res://sfx/win.wav")
 				$BGMusic.volume_db = -5
 				$BGMusic.play()
 				outroPlaying = true
 		TRACKS.LOSE:
-			if ($BGMusic.stream != preload("res://sfx/win.wav")): #We don't want this to play when we already won and the win sfx is playing
+			if ($BGMusic.stream != preload("res://sfx/win.wav")): # We don't want this to play when we already won and the win sfx is playing
 				$BGMusic.stream = preload("res://sfx/lose.wav")
 				$BGMusic.volume_db = -5
 				$BGMusic.play()

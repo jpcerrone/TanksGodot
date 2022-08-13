@@ -45,6 +45,8 @@ You can check out "Script Variables" in the Godot editor to set some properties 
 ### Debugging
 Check out the scripts/Debug.gd file where you can enable some flags to debug either the enemy bullet's raycasts or their movement raycasts.
 
+You can also set the starting level for the main game there.
+
 The runGame and runLevel powershell scripts can be used to launch the game or a particular level from VSCode's console.
 
 ## Author
