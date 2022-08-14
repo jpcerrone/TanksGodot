@@ -79,7 +79,7 @@ func checkIfAllEnemiesKilled():
 			nextLevel_timer.wait_time = 2
 			nextLevel_timer.autostart = true
 			nextLevel_timer.connect("timeout", self, "_on_nextLevel_timer_timeout") 
-			add_child(nextLevel_timer)
+			call_deferred("add_child", nextLevel_timer)
 			AudioManager.startBGMusic(AudioManager.TRACKS.WIN)
 		else:
 			get_tree().quit()

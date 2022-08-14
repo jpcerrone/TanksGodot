@@ -31,19 +31,19 @@ func _physics_process(delta):
 	$Cannon.rotation += delta * rotationDirection * cannonRotSpeed
 	if(okToShoot):
 		if Debug.SHOW_BULLET_RAYCASTS: BULLET_RAYCAST_LIST.clear()
-		var result = castBullet(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
+		var raycastResult = castBullet(getCannonTipPosition(), Vector2(1,0).rotated($Cannon.rotation))
 		# A non normalized result indicates the collision happened inside the collider, so we ignore it
-		if (result && result.normal.is_normalized()):
-			if Debug.SHOW_BULLET_RAYCASTS: DEBUG_BOUNCE_SPOT = result.position
-			if(result.collider.is_in_group('player')):
+		if (raycastResult && raycastResult.normal.is_normalized()):
+			if Debug.SHOW_BULLET_RAYCASTS: DEBUG_BOUNCE_SPOT = raycastResult.position
+			if(raycastResult.collider.is_in_group('player')):
 				tryToShoot()
 				okToShoot = false
-			elif(result.collider.is_in_group('walls') && bulletInstance.maxRebounds == 1):
+			elif(raycastResult.collider.is_in_group('walls') && bulletInstance.maxRebounds == 1):
 				var dirVector = Vector2(1,0).rotated($Cannon.rotation)
 				# newOrigin will substract bullets size to better allign with bounce
-				var newOrigin = result.position - dirVector.normalized()*bulletInstance.getCollisionShapeExtents().x
-				var newResult = castBullet(newOrigin, dirVector.bounce(result.normal))
-				if(newResult && newResult.collider.is_in_group('player')):
+				var newOrigin = raycastResult.position - dirVector.normalized()*bulletInstance.getCollisionShapeExtents().x
+				var secondRaycastResult = castBullet(newOrigin, dirVector.bounce(raycastResult.normal))
+				if(secondRaycastResult && secondRaycastResult.collider.is_in_group('player')):
 					tryToShoot()
 					okToShoot = false
 	if Debug.SHOW_BULLET_RAYCASTS: update()

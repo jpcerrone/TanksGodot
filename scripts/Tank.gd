@@ -59,6 +59,7 @@ func move(delta, direction):
 		updateRotationAnimation()
 	else:
 		currentDirection = direction
+		# warning-ignore:return_value_discarded
 		move_and_slide(direction.normalized() * speed)
 
 

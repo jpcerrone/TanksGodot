@@ -44,8 +44,8 @@ func _on_ChangeDirTimer_timeout():
 	var posibleDirections = []
 
 	for i in range(currentDirectionIndex-1, currentDirectionIndex+2):
-		var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, 40, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
-		if (!result):
+		var raycastResult = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, 40, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
+		if (!raycastResult):
 			posibleDirections.append(directions.values()[i%directions.size()])
 	if Debug.SHOW_MOVEMENT_RAYCASTS: update()
 	if (posibleDirections != []):
@@ -57,13 +57,13 @@ func _on_CollisionCheckTimer_timeout():
 	var spaceState = get_world_2d().direct_space_state
 	#Summing the array size to be able to get the currentDirectionIndex-1 in case of using the fist direction
 	var currentDirectionIndex = directions.values().find(currentDirection) + directions.values().size()
-	var result = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[currentDirectionIndex%directions.size()], spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
+	var straightRaycastResult = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[currentDirectionIndex%directions.size()], spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
 	if Debug.SHOW_MOVEMENT_RAYCASTS: update()
-	if result:
+	if straightRaycastResult:
 		var posibleDirections = []
 		for i in range(currentDirectionIndex-2, currentDirectionIndex+3):
-			var result2 = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
-			if (!result2):
+			var posibleDirectionRaycastResult = RayCastUtils.castShape(position, $CollisionShape2D.shape, directions.values()[i%directions.size()], spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
+			if (!posibleDirectionRaycastResult):
 				posibleDirections.append(directions.values()[i%directions.size()])
 		#if all 3 directions result in a collision, consider 2 more directions
 		if (posibleDirections.empty()):
@@ -72,8 +72,8 @@ func _on_CollisionCheckTimer_timeout():
 			alternativeDirecttions.append(directions.values()[(currentDirectionIndex+3)%directions.size()])
 			alternativeDirecttions.append(directions.values()[(currentDirectionIndex+4)%directions.size()])
 			for i in alternativeDirecttions:
-				var result3 = RayCastUtils.castShape(position, $CollisionShape2D.shape, i, spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
-				if (!result3):
+				var alternativeDirectionRaycastResult = RayCastUtils.castShape(position, $CollisionShape2D.shape, i, spaceState, collisionCheckDistance, MOVEMENT_RAYCAST_LIST, [self], movementCollisionMask)
+				if (!alternativeDirectionRaycastResult):
 					posibleDirections.append(i)
 		if (!posibleDirections.empty()):
 			direction = posibleDirections[(rng.randi_range(0, posibleDirections.size()-1))]

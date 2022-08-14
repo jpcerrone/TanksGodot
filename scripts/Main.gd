@@ -14,14 +14,15 @@ func _ready():
 	level = levelsdir.get_next() # Ignoring "Level.tscn"
 
 	# Start the game at a specific level (Default is #1)
-	#for i in Debug.STARTING_LEVEL: level = levelsdir.get_next() # Ignoring Levels
+	for i in Debug.STARTING_LEVEL: level = levelsdir.get_next() # Ignoring Levels
 
 	while(level != ""):
 		var levelString = levelStringFormat % level
 		var loadedLevel = load(levelString)
 		levels.append(loadedLevel)
 		level = levelsdir.get_next()
-	
+
+	# warning-ignore:return_value_discarded
 	AudioManager.connect("intro_finished", self, "unpause")
 	nextLevel()
 
