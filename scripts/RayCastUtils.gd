@@ -3,7 +3,7 @@ const NUMBER_OF_RAYS = 9
 
 static func castShape(origin: Vector2, shape, direction: Vector2, spaceState, rayLength, debugLines: Array, exclude: Array, colmask = 0b11111111):
 	
-	# Creates an array to store each of the rays base y positions, based on the NUMBER_OF_RAYS we want
+	# Creates an array to store each of the rays base y positions for the shape, based on the NUMBER_OF_RAYS we want
 	var shapeYExtent = shape.extents.y
 	var rayStep = 2*shapeYExtent/(NUMBER_OF_RAYS - 1)
 	var rayPositions = []
@@ -16,13 +16,13 @@ static func castShape(origin: Vector2, shape, direction: Vector2, spaceState, ra
 	for p in rayPositions:
 		var initPoint = origin + Vector2(0,p).rotated(direction.angle())
 		var endPoint = initPoint + direction*rayLength
-		var raycast = spaceState.intersect_ray(initPoint, endPoint, exclude, colmask)
+		var rayCollision = spaceState.intersect_ray(initPoint, endPoint, exclude, colmask)
 		if debugLines != null: debugLines.append([initPoint, endPoint])
-		if raycast:
-			if (raycast.position.distance_to(origin) < closestRayCollisionDistance):
-				closestRayCollisionDistance = abs(raycast.position.distance_to(origin))
-				closestRayCollision = raycast
-				closestRayOffest = raycast.position.distance_to(initPoint)
+		if rayCollision:
+			if (rayCollision.position.distance_to(origin) < closestRayCollisionDistance):
+				closestRayCollisionDistance = abs(rayCollision.position.distance_to(origin))
+				closestRayCollision = rayCollision
+				closestRayOffest = rayCollision.position.distance_to(initPoint)
 	if closestRayCollision:
 		closestRayCollision.position = origin + Vector2(1,0).rotated(direction.angle())*closestRayOffest 
 	return closestRayCollision

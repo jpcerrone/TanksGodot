@@ -2,6 +2,7 @@ extends Node
 var levels = []
 var currentLevelIndex = -1
 var currentLevel
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Get levels
@@ -12,15 +13,16 @@ func _ready():
 	var level = levelsdir.get_next() # Getting first file
 	level = levelsdir.get_next() # Ignoring "Level.tscn"
 
-	#Level start hack
-	#for i in 12: level = levelsdir.get_next() # Ignoring Levels
+	# Start the game at a specific level (Default is #1)
+	for i in Debug.STARTING_LEVEL: level = levelsdir.get_next() # Ignoring Levels
 
 	while(level != ""):
 		var levelString = levelStringFormat % level
 		var loadedLevel = load(levelString)
 		levels.append(loadedLevel)
 		level = levelsdir.get_next()
-	
+
+	# warning-ignore:return_value_discarded
 	AudioManager.connect("intro_finished", self, "unpause")
 	nextLevel()
 
@@ -39,7 +41,6 @@ func restartLevel():
 	get_tree().paused = true
 	AudioManager.startBGMusic(AudioManager.TRACKS.REPLAY)
 	_addCurrentLevel()
-
 
 func _addCurrentLevel():
 	currentLevel = levels[currentLevelIndex].instance()
