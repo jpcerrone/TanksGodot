@@ -9,6 +9,8 @@ export var maxRebounds = 1
 var currentRebounds
 var velocity = Vector2()
 
+class_name Bullet
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.play(AudioManager.SOUNDS.SHOT)
@@ -34,10 +36,7 @@ func _physics_process(delta):
 			self.destroy()
 		else: # Collision with walls
 			if (currentRebounds >= maxRebounds):
-				# Smoke
-				var smoke = Smoke.instance()
-				smoke.position = position
-				get_parent().add_child(smoke)
+				instanceSmoke()
 				queue_free()
 			else: 
 				velocity = velocity.bounce(collision.normal)
@@ -61,3 +60,8 @@ func getCollisionShapeExtents():
 	
 func getCollisionShape() -> Shape:
 	return $CollisionShape2D.shape
+
+func instanceSmoke():
+	var smoke = Smoke.instance()
+	smoke.position = position
+	get_parent().add_child(smoke)

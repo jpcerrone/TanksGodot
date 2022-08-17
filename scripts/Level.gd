@@ -10,7 +10,7 @@ signal level_end
 func _ready():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for e in enemies:
-		e.connect("tree_exiting", self, "checkIfAllEnemiesKilled") 
+		e.connect("killed", self, "checkIfAllEnemiesKilled") 
 	
 	var invisibleEnemies = get_tree().get_nodes_in_group("invisible")
 	for e in invisibleEnemies:
@@ -72,9 +72,11 @@ func _physics_process(delta):
 			$PlayerTank.tryToPlantMine()
 
 func checkIfAllEnemiesKilled():
+	var mostros = get_tree().get_nodes_in_group("enemy")
 	var enemies = get_tree().get_nodes_in_group("enemy").size()
-	if (enemies == 1):
+	if (enemies == 0):
 		if (get_parent().name == "Main"):
+			deleteAllBullets()
 			var nextLevel_timer = Timer.new()
 			nextLevel_timer.wait_time = 2
 			nextLevel_timer.autostart = true
@@ -83,6 +85,8 @@ func checkIfAllEnemiesKilled():
 			AudioManager.startBGMusic(AudioManager.TRACKS.WIN)
 		else:
 			get_tree().quit()
+	else:
+		AudioManager.play(AudioManager.SOUNDS.TANK_KILL)
 
 func _on_nextLevel_timer_timeout():
 	if (get_parent().name == "Main"):
@@ -91,11 +95,14 @@ func _on_nextLevel_timer_timeout():
 		get_tree().quit()
 
 func _on_PlayerTank_player_dies():
+	deleteAllBullets()
+
 	var death_timer = Timer.new()
 	death_timer.wait_time = 2
 	death_timer.autostart = true
 	death_timer.connect("timeout", self, "_on_death_timer_timeout") 
 	add_child(death_timer)
+	
 	AudioManager.startBGMusic(AudioManager.TRACKS.LOSE)
 	emit_signal("level_end")
 
@@ -104,3 +111,9 @@ func _on_death_timer_timeout():
 		emit_signal("player_died")
 	else:
 		get_tree().quit()
+
+func deleteAllBullets():
+	for node in get_children():
+		if(node is Bullet): 
+			node.instanceSmoke()
+			node.queue_free()

@@ -12,6 +12,8 @@ var okToShoot = false
 var BULLET_RAYCAST_LIST: Array
 var DEBUG_BOUNCE_SPOT: Vector2
 
+signal killed
+
 func _ready():
 	if Debug.SHOW_BULLET_RAYCASTS:
 		BULLET_RAYCAST_LIST = []
@@ -63,3 +65,7 @@ func castBullet(origin: Vector2, bulletDir):
 	var blastMask = 0b01111 # Blast detection occurs on layer 5 (value 4 0b10000), we want to ignore them when casting bullets, so we zero that bit
 	return RayCastUtils.castShape(origin, bulletInstance.getCollisionShape(), bulletDir, get_world_2d().direct_space_state, 1000, BULLET_RAYCAST_LIST, [], blastMask)
 
+func destroy():
+	remove_from_group("enemy")
+	emit_signal("killed")
+	.destroy()

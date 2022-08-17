@@ -18,6 +18,7 @@ enum SOUNDS {
 	TANK_DEATH,
 	BULLET_SHOT,
 	MINE_CANT,
+	TANK_KILL
 }
 
 enum TRACKS {
@@ -80,13 +81,13 @@ func _process(_delta):
 		match(sound):
 			SOUNDS.SMOKE:
 				available[0].stream = preload("res://sfx/smoke.wav")
-				available[0].volume_db = -10
+				available[0].volume_db = -15
 			SOUNDS.SHOT:
 				available[0].stream = preload("res://sfx/shot.wav")
 				available[0].volume_db = -10
 			SOUNDS.BOUNCE:
 				available[0].stream = preload("res://sfx/bounce.wav")
-				available[0].volume_db = -5
+				available[0].volume_db = -2
 			SOUNDS.TANK_MOVE:
 				available[0].stream = preload("res://sfx/tank_move.wav")
 				available[0].volume_db = -10
@@ -109,6 +110,10 @@ func _process(_delta):
 				available[0].stream = preload("res://sfx/mine_cant.wav")
 				available[0].stream.loop_mode = 0
 				available[0].volume_db = -5
+			SOUNDS.TANK_KILL:
+				available[0].stream = preload("res://sfx/tank_kill.wav")
+				available[0].stream.loop_mode = 0
+				available[0].volume_db = -6
 		available[0].play()
 		available.pop_front()
 

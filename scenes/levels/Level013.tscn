@@ -8,6 +8,3 @@ tile_data = PoolIntArray( 131080, 536870916, 0, 131082, 0, 0, 131093, 536870915,
 
 [node name="GreenTank" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 428.432, 64.0793 )
-speed = 40
-rotation_speed = 5.0
-maxMines = 0
