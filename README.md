@@ -1,6 +1,6 @@
 # TanksGodot - A Tanks game made in Godot inspired by Wii Play Tanks
 
-Image
+![gameplay](https://github.com/jpcerrone/TanksGodot/blob/master/sprites/ReadmeDemo.gif)
 
 ## Features
 * Allign-then-rotate 8 directional tank movement

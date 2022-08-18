@@ -72,7 +72,6 @@ func _physics_process(delta):
 			$PlayerTank.tryToPlantMine()
 
 func checkIfAllEnemiesKilled():
-	var mostros = get_tree().get_nodes_in_group("enemy")
 	var enemies = get_tree().get_nodes_in_group("enemy").size()
 	if (enemies == 0):
 		if (get_parent().name == "Main"):
@@ -115,5 +114,5 @@ func _on_death_timer_timeout():
 func deleteAllBullets():
 	for node in get_children():
 		if(node is Bullet): 
-			node.instanceSmoke()
+			node.instanceSmoke(false)
 			node.queue_free()

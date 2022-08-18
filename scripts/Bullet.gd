@@ -36,7 +36,7 @@ func _physics_process(delta):
 			self.destroy()
 		else: # Collision with walls
 			if (currentRebounds >= maxRebounds):
-				instanceSmoke()
+				instanceSmoke(true)
 				queue_free()
 			else: 
 				velocity = velocity.bounce(collision.normal)
@@ -61,7 +61,8 @@ func getCollisionShapeExtents():
 func getCollisionShape() -> Shape:
 	return $CollisionShape2D.shape
 
-func instanceSmoke():
+func instanceSmoke(sound):
 	var smoke = Smoke.instance()
 	smoke.position = position
+	smoke.withSound = sound
 	get_parent().add_child(smoke)

@@ -122,7 +122,8 @@ func _on_BGMusic_finished():
 		emit_signal("intro_finished")
 		introPlaying = false
 		startBGMusic(TRACKS.MAIN)
-	elif (outroPlaying):
-		outroPlaying = false
 	else:
-		startBGMusic(TRACKS.INTRO)
+		if (outroPlaying):
+			outroPlaying = false
+		else:
+			startBGMusic(TRACKS.INTRO)
