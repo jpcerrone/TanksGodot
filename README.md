@@ -1,4 +1,5 @@
-# TanksGodot - A Tanks game made in Godot inspired by Wii Play Tanks
+# TanksGodot
+## A Tanks game made in Godot inspired by Wii Play Tanks
 
 ![gameplay](https://github.com/jpcerrone/TanksGodot/blob/master/sprites/ReadmeDemo.gif)
 
